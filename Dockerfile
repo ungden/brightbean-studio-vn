@@ -24,7 +24,11 @@ COPY . .
 RUN cd theme/static_src && npm ci && npm run build
 
 # Compile translations (.po -> .mo)
-RUN python manage.py compilemessages || true
+RUN SECRET_KEY=build-placeholder \
+    ENCRYPTION_KEY_SALT=build-placeholder-salt \
+    DATABASE_URL=sqlite:///tmp/build.db \
+    DJANGO_SETTINGS_MODULE=config.settings.production \
+    python manage.py compilemessages
 
 # Collect static files
 RUN DJANGO_SETTINGS_MODULE=config.settings.production \
