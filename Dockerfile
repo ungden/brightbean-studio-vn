@@ -7,7 +7,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libpq-dev gcc curl ffmpeg \
+    libpq-dev gcc curl ffmpeg gettext \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js for Tailwind build
@@ -23,10 +23,14 @@ COPY . .
 # Build Tailwind CSS
 RUN cd theme/static_src && npm ci && npm run build
 
+# Compile translations (.po -> .mo)
+RUN python manage.py compilemessages || true
+
 # Collect static files
 RUN DJANGO_SETTINGS_MODULE=config.settings.production \
     SECRET_KEY=build-placeholder \
     DATABASE_URL=sqlite:///tmp/build.db \
+    ENCRYPTION_KEY_SALT=build-placeholder-salt \
     python manage.py collectstatic --noinput
 
 # Create non-root user for security
