@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Create - {{ workspace.name }} - Brightbean{% endblock %}
@@ -396,7 +397,7 @@
 
     <!-- Page header -->
     <div class="w-full min-h-[60px] inline-flex flex-row justify-between items-center px-6 pt-6 pb-0 mb-6">
-        <h1 class="text-2xl font-semibold text-stone-900" style="letter-spacing: -0.01em;">Create</h1>
+        <h1 class="text-2xl font-semibold text-stone-900" style="letter-spacing: -0.01em;">Tạo</h1>
 
         <!-- + New Idea -->
         <button x-show="activeTab === 'ideas'" x-cloak
@@ -490,16 +491,12 @@
                                placeholder="Tag name...">
                         <div class="flex justify-end gap-2 mt-4">
                             <button type="button" @click="showCreateTagModal = false; newTagName = ''"
-                                    class="px-4 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 rounded-lg cursor-pointer transition-colors">
-                                Cancel
-                            </button>
+                                    class="px-4 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 rounded-lg cursor-pointer transition-colors">Hủy</button>
                             <button type="button"
                                     @click="if(newTagName.trim()) { _persistTag(newTagName.trim()); if(!allTags.includes(newTagName.trim())) { allTags.push(newTagName.trim()); allTags.sort(); } showCreateTagModal = false; newTagName = ''; }"
                                     class="px-4 py-2 text-sm font-semibold text-white rounded-lg transition-colors"
                                     style="background: var(--primary);"
-                                    :class="newTagName.trim() ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'">
-                                Create
-                            </button>
+                                    :class="newTagName.trim() ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'">Tạo</button>
                         </div>
                     </div>
                 </div>
@@ -567,7 +564,7 @@
          @keydown.escape.window="closeCreateModal()">
         <div class="idea-modal" @click.stop>
             <!-- Close button -->
-            <button type="button" class="idea-modal-close" @click="closeCreateModal()" title="Close">
+            <button type="button" class="idea-modal-close" @click="closeCreateModal()" title="Đóng">
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
             <form action="{% url 'composer:idea_create' workspace_id=workspace.id %}"
@@ -767,7 +764,7 @@
          @keydown.escape.window="editingIdea = null">
         <div class="idea-modal" @click.stop>
             <!-- Close button -->
-            <button type="button" class="idea-modal-close" @click="editingIdea = null" title="Close">
+            <button type="button" class="idea-modal-close" @click="editingIdea = null" title="Đóng">
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
             <form :action="editingIdea ? `/workspace/{{ workspace.id }}/ideas/${editingIdea.id}/edit/` : ''"
@@ -915,9 +912,7 @@
                             class="px-4 py-2 text-sm font-medium rounded-full transition-colors cursor-pointer"
                             style="color: var(--danger, #ef4444); margin-right: auto; background: transparent;"
                             onmouseenter="this.style.background='rgba(239,68,68,0.08)'"
-                            onmouseleave="this.style.background='transparent'">
-                        Delete
-                    </button>
+                            onmouseleave="this.style.background='transparent'">Xóa</button>
                     <button type="button" @click="createPostFromIdea($event, 'edit')"
                             :disabled="editMediaUploadCount > 0 || isEditSaving"
                             :class="(editMediaUploadCount > 0 || isEditSaving) && 'opacity-50 cursor-not-allowed'"
@@ -977,9 +972,7 @@
                 <div class="flex gap-3">
                     <button type="button"
                             @click="showDeleteIdeaConfirm = false"
-                            class="flex-1 px-4 py-2.5 text-sm font-medium rounded-full border border-stone-200 text-stone-700 hover:bg-stone-50 transition-colors cursor-pointer">
-                        Cancel
-                    </button>
+                            class="flex-1 px-4 py-2.5 text-sm font-medium rounded-full border border-stone-200 text-stone-700 hover:bg-stone-50 transition-colors cursor-pointer">Hủy</button>
                     <button type="button"
                             @click="
                                 if (editingIdea && !deletingIdea) {
@@ -994,7 +987,7 @@
                             :disabled="deletingIdea"
                             :class="deletingIdea && 'opacity-50 cursor-not-allowed'"
                             class="flex-1 px-4 py-2.5 text-sm font-medium rounded-full bg-red-500 text-white hover:bg-red-600 transition-colors cursor-pointer">
-                        <span x-show="!deletingIdea">Delete</span>
+                        <span x-show="!deletingIdea">Xóa</span>
                         <span x-show="deletingIdea">Deleting…</span>
                     </button>
                 </div>
@@ -1013,16 +1006,12 @@
                        placeholder="Tag name...">
                 <div class="flex justify-end gap-2 mt-4">
                     <button type="button" @click="closeIdeaCreateTagModal()"
-                            class="px-4 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 rounded-lg cursor-pointer transition-colors">
-                        Cancel
-                    </button>
+                            class="px-4 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 rounded-lg cursor-pointer transition-colors">Hủy</button>
                     <button type="button"
                             @click="createIdeaTagFromModal()"
                             class="px-4 py-2 text-sm font-semibold text-white rounded-lg transition-colors"
                             style="background: var(--primary);"
-                            :class="newIdeaTagName.trim() ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'">
-                        Create
-                    </button>
+                            :class="newIdeaTagName.trim() ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'">Tạo</button>
                 </div>
             </div>
         </div>
@@ -1035,7 +1024,7 @@
          @keydown.escape.window="viewingTemplate = null">
         <div class="idea-modal" @click.stop style="max-width: 560px;">
             <!-- Close button -->
-            <button type="button" class="idea-modal-close" @click="viewingTemplate = null" title="Close">
+            <button type="button" class="idea-modal-close" @click="viewingTemplate = null" title="Đóng">
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
 

@@ -1,3 +1,4 @@
+{% load i18n %}
 <div id="approval-list" class="space-y-3">
     {% for post in posts %}
     {% include "approvals/partials/post_row.html" with post=post workspace=workspace %}

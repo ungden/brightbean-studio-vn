@@ -1,3 +1,4 @@
+{% load i18n %}
 {% comment %}Version history list. Expects: asset, versions, workspace{% endcomment %}
 
 {% if versions %}
@@ -37,9 +38,7 @@
             onmouseleave="this.style.background='transparent'"
             hx-post="{% url 'media_library:version_restore' workspace_id=workspace.id asset_id=asset.id version_id=version.id %}"
             hx-target="#version-list-{{ asset.id }}"
-            hx-confirm="Restore version {{ version.version_number }}? This will create a new version.">
-      Restore
-    </button>
+            hx-confirm="Restore version {{ version.version_number }}? This will create a new version.">Khôi phục</button>
     {% endif %}
   </div>
   {% endfor %}

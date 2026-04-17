@@ -3,6 +3,7 @@
 import uuid
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class PublishLog(models.Model):
@@ -18,14 +19,14 @@ class PublishLog(models.Model):
         related_name="publish_logs",
     )
     attempt_number = models.PositiveIntegerField(default=1)
-    status_code = models.IntegerField(null=True, blank=True, help_text="HTTP status from platform API.")
+    status_code = models.IntegerField(null=True, blank=True, help_text=_("HTTP status from platform API."))
     response_body = models.TextField(
         blank=True,
         default="",
-        help_text="Truncated response body (max 1000 chars).",
+        help_text=_("Truncated response body (max 1000 chars)."),
     )
     error_message = models.TextField(blank=True, default="")
-    duration_ms = models.PositiveIntegerField(default=0, help_text="Request duration in milliseconds.")
+    duration_ms = models.PositiveIntegerField(default=0, help_text=_("Request duration in milliseconds."))
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -52,11 +53,11 @@ class RateLimitState(models.Model):
         related_name="rate_limit_states",
     )
     platform = models.CharField(max_length=30)
-    requests_remaining = models.IntegerField(default=-1, help_text="-1 means unknown.")
+    requests_remaining = models.IntegerField(default=-1, help_text=_("-1 means unknown."))
     window_resets_at = models.DateTimeField(
         null=True,
         blank=True,
-        help_text="When the rate limit window resets.",
+        help_text=_("When the rate limit window resets."),
     )
     last_updated = models.DateTimeField(auto_now=True)
 

@@ -1,6 +1,7 @@
 """Forms for the Post Composer."""
 
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from .models import ContentCategory, Idea, Post, PostTemplate
 
@@ -26,7 +27,7 @@ class PostForm(forms.ModelForm):
     selected_accounts = forms.CharField(
         widget=forms.HiddenInput(),
         required=False,
-        help_text="Comma-separated list of SocialAccount UUIDs.",
+        help_text=_("Comma-separated list of SocialAccount UUIDs."),
     )
 
     scheduled_date = forms.DateField(

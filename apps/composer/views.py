@@ -250,7 +250,7 @@ def compose(request, workspace_id, post_id=None):
         else:
             selected_account_ids = list(post.platform_posts.values_list("social_account_id", flat=True))
         media_attachments = post.media_attachments.select_related("media_asset").all()
-        platform_extras = {str(pp.social_account_id): (pp.platform_extra or {}) for pp in post.platform_posts.all()}
+        platform_extras = {str(pp.social_account_id): (pp.platform_extra or {}) for pp in post.platform_posts.select_related("social_account").all()}
     else:
         post = None
         # Pre-fill scheduled date/time from query params (e.g. when coming from calendar "+" CTA)
@@ -1459,7 +1459,7 @@ def _parse_media_asset_ids(raw_ids):
 
 def _build_idea_media_payload(idea):
     """Build ordered media payload and attachment list for Kanban rendering."""
-    attachments = [att for att in idea.media_attachments.all() if att.media_asset_id and att.media_asset]
+    attachments = [att for att in idea.media_attachments.select_related("media_asset").all() if att.media_asset_id and att.media_asset]
     media_payload = []
     for att in attachments:
         asset = att.media_asset

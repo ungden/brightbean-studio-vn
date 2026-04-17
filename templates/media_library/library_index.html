@@ -1,4 +1,5 @@
 {% extends "layouts/workspace_settings.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}Media Library - {{ workspace.name }}{% endblock %}
@@ -189,7 +190,7 @@
       <!-- Type filters -->
       <div class="flex items-center gap-1.5 overflow-x-auto flex-nowrap">
         <a href="{% url 'media_library:index' workspace_id=workspace.id %}{% if current_folder %}?folder={{ current_folder }}{% endif %}"
-           class="ml-filter-pill {% if not current_type %}active{% endif %}">All</a>
+           class="ml-filter-pill {% if not current_type %}active{% endif %}">Tất cả</a>
         {% for type_val, type_label in file_types %}
         <a href="{% url 'media_library:index' workspace_id=workspace.id %}?type={{ type_val }}{% if current_folder %}&folder={{ current_folder }}{% endif %}"
            class="ml-filter-pill {% if current_type == type_val %}active{% endif %}">{{ type_label }}</a>
@@ -231,9 +232,7 @@
       <!-- Upload button -->
       <button @click="$refs.fileInput.click()"
               class="inline-flex items-center gap-1.5 px-4 py-1.5 text-sm font-semibold text-orange-600 bg-orange-50 border border-orange-200 rounded-full hover:bg-orange-100 hover:border-orange-300 active:bg-orange-100 transition-all duration-150 cursor-pointer">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-        Upload
-      </button>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>Tải lên</button>
       <input type="file" x-ref="fileInput" @change="handleFiles($event.target.files)" multiple
              accept="{{ accepted_file_types }}" class="hidden">
     </div>

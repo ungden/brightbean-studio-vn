@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from apps.common.encryption import EncryptedJSONField
 from apps.common.managers import OrgScopedManager
@@ -35,7 +36,7 @@ class PlatformCredential(models.Model):
     platform = models.CharField(max_length=30, choices=Platform.choices)
     credentials = EncryptedJSONField(
         default=dict,
-        help_text="Encrypted JSON containing platform-specific credential fields",
+        help_text=_("Encrypted JSON containing platform-specific credential fields"),
     )
     is_configured = models.BooleanField(default=False)
     tested_at = models.DateTimeField(blank=True, null=True)

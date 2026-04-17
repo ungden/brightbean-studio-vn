@@ -4,6 +4,7 @@ import uuid
 
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from apps.common.managers import WorkspaceScopedManager
 
@@ -181,7 +182,7 @@ class SavedReply(models.Model):
     )
     title = models.CharField(max_length=255)
     body = models.TextField(
-        help_text="Supports variables: {sender_name}, {account_name}, {post_url}",
+        help_text=_("Supports variables: {sender_name}, {account_name}, {post_url}"),
     )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -220,7 +221,7 @@ class InboxSLAConfig(models.Model):
     is_active = models.BooleanField(default=False)
     auto_resolve_on_reply = models.BooleanField(
         default=True,
-        help_text="Automatically mark messages as resolved when a reply is sent.",
+        help_text=_("Automatically mark messages as resolved when a reply is sent."),
     )
 
     class Meta:

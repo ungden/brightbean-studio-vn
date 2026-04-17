@@ -1,3 +1,4 @@
+{% load i18n %}
 {% comment %}Modal for creating a new folder. Expects: workspace{% endcomment %}
 
 <div class="fixed inset-0 z-50 flex items-center justify-center" @keydown.escape.window="showNewFolder = false">
@@ -25,9 +26,7 @@
                 class="px-4 py-2 text-sm font-medium rounded-lg transition-colors cursor-pointer"
                 style="color: var(--text-secondary, #57534E);"
                 onmouseenter="this.style.background='var(--surface-2, #F5F5F4)'"
-                onmouseleave="this.style.background='transparent'">
-          Cancel
-        </button>
+                onmouseleave="this.style.background='transparent'">Hủy</button>
         <button type="submit"
                 class="px-4 py-2 text-sm font-semibold text-white rounded-lg transition-colors cursor-pointer"
                 style="background: var(--primary, #F97316);"

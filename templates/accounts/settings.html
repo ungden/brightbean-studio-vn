@@ -1,8 +1,9 @@
 {% extends "layouts/settings.html" %}
+{% load i18n %}
 {% block title %}Profile - Settings - Brightbean{% endblock %}
 {% block content %}
 <div class="max-w-2xl">
-    <h2 class="text-xl font-semibold mb-8" style="color: var(--text-primary);">Profile</h2>
+    <h2 class="text-xl font-semibold mb-8" style="color: var(--text-primary);">Hồ sơ</h2>
 
     <!-- Photo section -->
     <form method="POST" enctype="multipart/form-data" x-data="{
@@ -59,7 +60,7 @@
         <input type="hidden" name="action" value="update_name">
         <div class="flex items-end gap-4">
             <div class="flex-1">
-                <label for="name" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Name</label>
+                <label for="name" class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Tên</label>
                 <input type="text" id="name" name="name" value="{{ user.name }}" required maxlength="255"
                        class="w-full px-3 py-2 text-sm rounded-lg outline-none transition-colors"
                        style="border: 1px solid var(--border); color: var(--text-primary); background: var(--surface-0);"
@@ -126,7 +127,7 @@
     <!-- Role section -->
     {% if org_membership %}
     <div class="mb-10">
-        <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Role</label>
+        <label class="block text-sm font-semibold mb-2" style="color: var(--text-primary);">Vai trò</label>
         <div class="flex items-center gap-3">
             <span class="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium rounded-full"
                   style="background: var(--neutral-100); color: var(--text-primary);">
@@ -201,9 +202,7 @@
                                 class="px-5 py-2 text-sm font-medium rounded-full cursor-pointer transition-colors"
                                 style="background: var(--neutral-100); color: var(--text-primary);"
                                 onmouseenter="this.style.background='var(--neutral-200)'"
-                                onmouseleave="this.style.background='var(--neutral-100)'">
-                            Cancel
-                        </button>
+                                onmouseleave="this.style.background='var(--neutral-100)'">Hủy</button>
                         <form method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="action" value="delete_account">

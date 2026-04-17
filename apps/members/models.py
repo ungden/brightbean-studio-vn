@@ -4,6 +4,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from apps.common.managers import OrgScopedManager
 
@@ -99,7 +100,7 @@ class CustomRole(models.Model):
     name = models.CharField(max_length=100)
     permissions = models.JSONField(
         default=dict,
-        help_text="Permission keys mapped to booleans",
+        help_text=_("Permission keys mapped to booleans"),
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -133,7 +134,7 @@ class Invitation(models.Model):
     )
     workspace_assignments = models.JSONField(
         default=list,
-        help_text='List of {"workspace_id": "...", "role": "..."}',
+        help_text=_('List of {"workspace_id": "...", "role": "..."}'),
     )
     invited_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,

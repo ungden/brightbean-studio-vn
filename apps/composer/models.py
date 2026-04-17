@@ -17,6 +17,7 @@ from urllib.parse import urlsplit
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from apps.common.managers import WorkspaceScopedManager
 
@@ -38,7 +39,7 @@ class ContentCategory(models.Model):
     color = models.CharField(
         max_length=7,
         default="#3B82F6",
-        help_text="Hex color for calendar display, e.g. #FF5733",
+        help_text=_("Hex color for calendar display, e.g. #FF5733"),
     )
     position = models.PositiveIntegerField(default=0)
 
@@ -51,7 +52,7 @@ class ContentCategory(models.Model):
         db_table = "composer_content_category"
         ordering = ["position", "name"]
         unique_together = [("workspace", "name")]
-        verbose_name_plural = "content categories"
+        verbose_name_plural = _("content categories")
 
     def __str__(self):
         return self.name
@@ -198,7 +199,7 @@ class IdeaMedia(models.Model):
         on_delete=models.CASCADE,
         related_name="idea_attachments",
     )
-    position = models.PositiveIntegerField(default=0, help_text="Ordering position on the idea.")
+    position = models.PositiveIntegerField(default=0, help_text=_("Ordering position on the idea."))
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -265,6 +266,16 @@ class Post(models.Model):
     class Meta:
         db_table = "composer_post"
         ordering = ["-created_at"]
+        indexes = [
+            models.Index(
+                fields=["workspace", "-created_at"],
+                name="idx_post_ws_created",
+            ),
+            models.Index(
+                fields=["workspace", "scheduled_at"],
+                name="idx_post_ws_scheduled",
+            ),
+        ]
 
     def __str__(self):
         snippet = (self.caption[:50] + "...") if len(self.caption) > 50 else self.caption
@@ -389,13 +400,13 @@ class PlatformPost(models.Model):
     platform_specific_media = models.JSONField(
         blank=True,
         null=True,
-        help_text="JSON list of media asset IDs with platform-specific ordering/cropping.",
+        help_text=_("JSON list of media asset IDs with platform-specific ordering/cropping."),
     )
     platform_specific_first_comment = models.TextField(blank=True, null=True)
     platform_extra = models.JSONField(
         default=dict,
         blank=True,
-        help_text="Per-platform metadata (privacy, tags, thumbnail_asset_id, etc.)",
+        help_text=_("Per-platform metadata (privacy, tags, thumbnail_asset_id, etc.)"),
     )
 
     # Editorial + publishing state
@@ -409,7 +420,7 @@ class PlatformPost(models.Model):
         max_length=255,
         blank=True,
         default="",
-        help_text="The post ID on the platform after publishing.",
+        help_text=_("The post ID on the platform after publishing."),
     )
     publish_error = models.TextField(blank=True, default="")
     published_at = models.DateTimeField(blank=True, null=True)
@@ -417,7 +428,7 @@ class PlatformPost(models.Model):
         blank=True,
         null=True,
         db_index=True,
-        help_text="Per-platform scheduled publish time. NULL falls back to Post.scheduled_at.",
+        help_text=_("Per-platform scheduled publish time. NULL falls back to Post.scheduled_at."),
     )
     retry_count = models.PositiveIntegerField(default=0)
     next_retry_at = models.DateTimeField(blank=True, null=True)
@@ -534,12 +545,12 @@ class PostMedia(models.Model):
         on_delete=models.CASCADE,
         related_name="post_usages",
     )
-    position = models.PositiveIntegerField(default=0, help_text="Ordering position in carousel.")
+    position = models.PositiveIntegerField(default=0, help_text=_("Ordering position in carousel."))
     alt_text = models.TextField(blank=True, default="")
     platform_overrides = models.JSONField(
         default=dict,
         blank=True,
-        help_text='Per-platform crop/format overrides, e.g. {"instagram": {"crop": "4:5"}}',
+        help_text=_('Per-platform crop/format overrides, e.g. {"instagram": {"crop": "4:5"}}'),
     )
 
     class Meta:
@@ -562,7 +573,7 @@ class PostVersion(models.Model):
     )
     version_number = models.PositiveIntegerField()
     snapshot = models.JSONField(
-        help_text="Full post state at time of save (caption, media, platforms, etc.).",
+        help_text=_("Full post state at time of save (caption, media, platforms, etc.)."),
     )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -645,7 +656,7 @@ class CSVImportJob(models.Model):
     file = models.FileField(upload_to="csv_imports/")
     column_mapping = models.JSONField(
         default=dict,
-        help_text="Maps CSV column indices to post fields.",
+        help_text=_("Maps CSV column indices to post fields."),
     )
     status = models.CharField(
         max_length=20,
@@ -656,7 +667,7 @@ class CSVImportJob(models.Model):
     processed_rows = models.PositiveIntegerField(default=0)
     result_summary = models.JSONField(
         default=dict,
-        help_text='{"created": N, "errors": N, "warnings": [...]}',
+        help_text=_('{"created": N, "errors": N, "warnings": [...]}'),
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -681,7 +692,7 @@ class Feed(models.Model):
         related_name="feeds",
     )
     name = models.CharField(max_length=255)
-    url = models.URLField(max_length=500, help_text="RSS feed URL")
+    url = models.URLField(max_length=500, help_text=_("RSS feed URL"))
     website_url = models.URLField(max_length=500, blank=True, default="")
     added_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,

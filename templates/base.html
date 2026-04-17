@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" style="{% block html_style %}{% endblock %}">
@@ -296,7 +297,7 @@
                         {% endif %}
                     </a>
                     {% empty %}
-                    <p class="px-3 py-2 text-sm text-stone-400">No workspaces</p>
+                    <p class="px-3 py-2 text-sm text-stone-400">Chưa có không gian làm việc</p>
                     {% endfor %}
                     {% if can_create_workspace %}
                     <div class="border-t border-stone-100 mt-1 pt-1">
@@ -305,7 +306,7 @@
                             <div class="w-7 h-7 rounded-md flex items-center justify-center border border-dashed border-stone-300 flex-shrink-0">
                                 <svg class="w-3.5 h-3.5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
                             </div>
-                            <span>Create workspace</span>
+                            <span>Tạo không gian làm việc</span>
                         </button>
                     </div>
                     {% endif %}
@@ -316,7 +317,7 @@
                             <div class="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0">
                                 <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.32 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
                             </div>
-                            <span>Workspace settings</span>
+                            <span>Cài đặt không gian làm việc</span>
                         </a>
                     </div>
                     {% endif %}
@@ -333,7 +334,7 @@
                             class="btn-brand w-full flex items-center justify-center gap-1.5 text-sm py-2 cursor-pointer"
                             :style="sidebarCollapsed ? 'padding-left:1.15rem;padding-right:1.15rem' : ''">
                         <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                        <span class="sidebar-new-label" x-show="!sidebarCollapsed">New</span>
+                        <span class="sidebar-new-label" x-show="!sidebarCollapsed">Mới</span>
                     </button>
 
                     <!-- Dropdown -->
@@ -351,8 +352,8 @@
                                 <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                             </div>
                             <div>
-                                <div class="text-sm font-semibold text-stone-800">Post</div>
-                                <div class="text-xs text-stone-500">Publish content to a channel</div>
+                                <div class="text-sm font-semibold text-stone-800">Bài viết</div>
+                                <div class="text-xs text-stone-500">Đăng nội dung lên một kênh</div>
                             </div>
                         </a>
                         <button type="button" @click="openCreateModal()"
@@ -361,8 +362,8 @@
                                 <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
                             </div>
                             <div class="text-left">
-                                <div class="text-sm font-semibold text-stone-800">Idea</div>
-                                <div class="text-xs text-stone-500">Capture a content idea</div>
+                                <div class="text-sm font-semibold text-stone-800">Ý tưởng</div>
+                                <div class="text-xs text-stone-500">Ghi lại ý tưởng nội dung</div>
                             </div>
                         </button>
                     </div>
@@ -375,7 +376,7 @@
                          @click.self="closeCreateModal()"
                          @keydown.escape.window="closeCreateModal()">
                         <div class="idea-modal" @click.stop>
-                            <button type="button" class="idea-modal-close" @click="closeCreateModal()" title="Close">
+                            <button type="button" class="idea-modal-close" @click="closeCreateModal()" title="Đóng">
                                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                             </button>
                             <form action="{% url 'composer:idea_create' workspace_id=request.workspace.id %}"
@@ -390,7 +391,7 @@
 
                                 <!-- Header -->
                                 <div class="idea-modal-header">
-                                    <h2 class="text-lg font-semibold" style="color: var(--text-primary);">Create Idea</h2>
+                                    <h2 class="text-lg font-semibold" style="color: var(--text-primary);">Tạo ý tưởng</h2>
                                     <div class="flex items-center gap-2">
                                         <!-- Column selector dropdown -->
                                         <div class="relative" @click.away="createGroupDropdownOpen = false">
@@ -415,7 +416,7 @@
                                         <div class="relative" @click.away="createTagDropdownOpen = false">
                                             <button type="button" class="idea-pill-btn" @click="createTagDropdownOpen = !createTagDropdownOpen; createGroupDropdownOpen = false; if(createTagDropdownOpen) $nextTick(() => $refs.sidebarCreateTagSearchInput.focus())">
                                                 <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-                                                <span>Tags</span>
+                                                <span>Thẻ</span>
                                                 <span x-show="createSelectedTags.length" class="inline-flex items-center justify-center w-4 h-4 rounded-full text-[10px] font-bold text-white" style="background: var(--primary);" x-text="createSelectedTags.length"></span>
                                                 <svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
                                             </button>
@@ -436,7 +437,7 @@
                                                     </label>
                                                 </template>
                                                 <template x-if="!createTagSearch.trim() && !allTags.length">
-                                                    <div class="px-3 py-2 text-xs" style="color: var(--text-tertiary);">No tags yet. Type to create one.</div>
+                                                    <div class="px-3 py-2 text-xs" style="color: var(--text-tertiary);">Chưa có thẻ nào. Gõ để tạo mới.</div>
                                                 </template>
                                                 <template x-if="createTagSearch.trim() && !filteredCreateTags.includes(createTagSearch.trim())">
                                                     <div class="border-t" style="border-color: var(--border); margin-top: 2px; padding-top: 2px;">
@@ -501,8 +502,8 @@
                                              @dragleave.prevent="_mediaDragOver = false"
                                              @drop.prevent="_mediaDragOver = false; _handleMediaDrop($event)">
                                             <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                                            <span x-show="!createMediaAssets.length">Drag &amp; drop</span>
-                                            <span x-show="createMediaAssets.length">Add another file</span>
+                                            <span x-show="!createMediaAssets.length">Kéo &amp; thả</span>
+                                            <span x-show="createMediaAssets.length">Thêm tệp khác</span>
                                             <span>or <strong style="color: var(--primary); cursor: pointer;">select a file</strong></span>
                                         </div>
                                     </div>
@@ -545,9 +546,7 @@
                                             class="px-5 py-2 text-sm font-medium rounded-full transition-colors cursor-pointer"
                                             style="background: var(--neutral-100); color: var(--text-primary);"
                                             onmouseenter="this.style.background='var(--neutral-200)'"
-                                            onmouseleave="this.style.background='var(--neutral-100)'">
-                                        Cancel
-                                    </button>
+                                            onmouseleave="this.style.background='var(--neutral-100)'">Hủy</button>
                                     <button type="submit"
                                             :disabled="createMediaUploadCount > 0 || isCreateSaving"
                                             :class="(createMediaUploadCount > 0 || isCreateSaving) && 'opacity-50 cursor-not-allowed'"
@@ -564,23 +563,19 @@
                     <div x-show="showCreateTagModal" x-cloak class="fixed inset-0 z-[220] flex items-center justify-center" @keydown.escape.window="closeCreateTagModal()">
                         <div class="fixed inset-0 bg-black/30" @click="closeCreateTagModal()"></div>
                         <div class="relative bg-white rounded-2xl shadow-xl w-full max-w-sm mx-4 p-6" @click.stop>
-                            <h3 class="text-base font-semibold text-stone-800 mb-4">Create new tag</h3>
+                            <h3 class="text-base font-semibold text-stone-800 mb-4">Tạo thẻ mới</h3>
                             <input type="text" x-ref="sidebarNewTagNameInput" x-model="newTagName"
                                    @keydown.enter.prevent="createTagFromModal()"
                                    class="w-full text-sm px-3 py-2.5 rounded-xl border border-stone-200 outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-100 transition-all"
                                    placeholder="Tag name...">
                             <div class="flex justify-end gap-2 mt-4">
                                 <button type="button" @click="closeCreateTagModal()"
-                                        class="px-4 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 rounded-lg cursor-pointer transition-colors">
-                                    Cancel
-                                </button>
+                                        class="px-4 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 rounded-lg cursor-pointer transition-colors">Hủy</button>
                                 <button type="button"
                                         @click="createTagFromModal()"
                                         class="px-4 py-2 text-sm font-semibold text-white rounded-lg transition-colors"
                                         style="background: var(--primary);"
-                                        :class="newTagName.trim() ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'">
-                                    Create
-                                </button>
+                                        :class="newTagName.trim() ? 'cursor-pointer' : 'opacity-50 cursor-not-allowed'">Tạo</button>
                             </div>
                         </div>
                     </div>
@@ -594,29 +589,29 @@
                 {% if request.workspace %}
                 <a href="{% url 'calendar:calendar' workspace_id=request.workspace.id %}" class="mb-1 sidebar-nav-item {% if request.resolver_match.url_name == 'calendar' %}active{% endif %}">
                     <svg class="flex-shrink-0" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                    <span class="sidebar-nav-label">Publish</span>
+                    <span class="sidebar-nav-label">Đăng bài</span>
                 </a>
                 <a href="{% url 'composer:create_landing' workspace_id=request.workspace.id %}" class="mb-1 sidebar-nav-item {% if request.resolver_match.url_name == 'create_landing' or request.resolver_match.url_name == 'compose' %}active{% endif %}">
                     <svg class="flex-shrink-0" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 00-4 12.73V16a1 1 0 001 1h6a1 1 0 001-1v-1.27A7 7 0 0012 2z"/><path d="M9 18h6"/><path d="M10 22h4"/><path d="M10 8.5c0 1.5 2 2.5 2 4"/><path d="M14 8.5c0 1.5-2 2.5-2 4"/></svg>
-                    <span class="sidebar-nav-label">Create Idea</span>
+                    <span class="sidebar-nav-label">Tạo ý tưởng</span>
                 </a>                
                 <a href="{% url 'inbox:feed' workspace_id=request.workspace.id %}" class="mb-1 sidebar-nav-item {% if request.resolver_match.app_name == 'inbox' %}active{% endif %}">
                     <svg class="flex-shrink-0" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-                    <span class="sidebar-nav-label">Social Inbox</span>
+                    <span class="sidebar-nav-label">Hộp thư mạng xã hội</span>
                     {% if sidebar_unread_inbox_count %}<span class="sidebar-badge">{{ sidebar_unread_inbox_count }}</span>{% endif %}
                 </a>
                 {% endif %}
 
                 <a href="{% url 'notifications:list' %}" class="mb-1 sidebar-nav-item {% if request.resolver_match.url_name == 'list' and request.resolver_match.app_name == 'notifications' %}active{% endif %}">
                     <svg class="flex-shrink-0" width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
-                    <span class="sidebar-nav-label">Notifications</span>
+                    <span class="sidebar-nav-label">Thông báo</span>
                 </a>
 
                 {% if request.workspace %}
                 {% if sidebar_channels or sidebar_unhealthy_channels %}
                 <!-- Channels -->
                 <div class="group flex items-center justify-between mt-3.5 sidebar-section-label-wrap">
-                    <div class="sidebar-section-label" style="padding-top:0">Channels</div>
+                    <div class="sidebar-section-label" style="padding-top:0">Kênh</div>
                     <a href="{% url 'social_accounts:connect' workspace_id=request.workspace.id %}"
                        class="opacity-0 group-hover:opacity-100 w-5 h-5 flex items-center justify-center rounded text-stone-400 hover:text-stone-600 transition-all mr-2 sidebar-nav-label"
                        title="Connect a channel">
@@ -657,9 +652,7 @@
                     <span class="sidebar-nav-label truncate flex-1 text-stone-400 opacity-60">{{ channel.account_name }}</span>
                     <form method="post" action="{% url 'social_accounts:reconnect' workspace_id=request.workspace.id account_id=channel.id %}" class="sidebar-nav-label">
                         {% csrf_token %}
-                        <button type="submit" class="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold text-orange-700 bg-orange-50 rounded-full hover:bg-orange-100 transition-colors cursor-pointer" title="Reconnect {{ channel.account_name }}">
-                            Reconnect
-                        </button>
+                        <button type="submit" class="inline-flex items-center px-2 py-0.5 text-[11px] font-semibold text-orange-700 bg-orange-50 rounded-full hover:bg-orange-100 transition-colors cursor-pointer" title="Reconnect {{ channel.account_name }}">Kết nối lại</button>
                     </form>
                 </div>
                 {% endfor %}
@@ -667,7 +660,7 @@
                 <!-- Connect channels (hidden when collapsed) -->
                 {% if sidebar_connectable_platforms %}
                 <div class="sidebar-connect-channels" x-show="!sidebarCollapsed">
-                <div class="sidebar-section-label">Connect channels</div>
+                <div class="sidebar-section-label">Kết nối kênh</div>
                 {% for platform_key, platform_label in sidebar_connectable_platforms|slice:":3" %}
                 <a href="{% url 'social_accounts:connect' workspace_id=request.workspace.id %}" class="sidebar-nav-item">
                     <div class="relative flex-shrink-0">
@@ -685,7 +678,7 @@
                     <div class="w-4 h-4 flex items-center justify-center flex-shrink-0 rounded-lg bg-stone-100">
                         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
                     </div>
-                    <span class="sidebar-nav-label">More channels</span>
+                    <span class="sidebar-nav-label">Thêm kênh</span>
                 </a>
                 </div>
                 {% endif %}
@@ -764,18 +757,14 @@
                         <!-- Settings -->
                         <a href="{% url 'accounts:settings' %}"
                            class="flex items-center gap-3 px-4 py-2.5 text-sm text-stone-700 hover:bg-black/[0.04] transition-colors">
-                            <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-                            Settings
-                        </a>
+                            <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Cài đặt</a>
                     </div>
 
                     <div class="border-t border-stone-100">
                         <!-- Log out -->
                         <a href="{% url 'accounts:logout' %}"
                            class="flex items-center gap-3 px-4 py-2.5 text-sm text-stone-700 hover:bg-black/[0.04] transition-colors">
-                            <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                            Log out
-                        </a>
+                            <svg class="w-4 h-4 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Đăng xuất</a>
                     </div>
                 </div>
             </div>
@@ -1230,20 +1219,16 @@
                  x-transition:leave-start="opacity-100 scale-100"
                  x-transition:leave-end="opacity-0 scale-95"
                  @keydown.escape.window="createWsOpen = false">
-                <h3 class="text-base font-semibold text-stone-900 mb-4">Create workspace</h3>
+                <h3 class="text-base font-semibold text-stone-900 mb-4">Tạo không gian làm việc</h3>
                 <form method="post" action="{% url 'workspaces:create' %}">
                     {% csrf_token %}
-                    <input type="text" name="name" x-ref="newWsName" required placeholder="Workspace name"
+                    <input type="text" name="name" x-ref="newWsName" required placeholder="Tên không gian làm việc"
                            class="form-input-styled w-full mb-4">
                     <div class="flex justify-end gap-2">
                         <button type="button" @click="createWsOpen = false"
-                                class="px-4 py-2 text-sm font-medium text-stone-600 bg-white border border-stone-200 rounded-lg hover:bg-stone-50 transition-colors cursor-pointer">
-                            Cancel
-                        </button>
+                                class="px-4 py-2 text-sm font-medium text-stone-600 bg-white border border-stone-200 rounded-lg hover:bg-stone-50 transition-colors cursor-pointer">Hủy</button>
                         <button type="submit"
-                                class="btn-brand px-4 py-2 text-sm cursor-pointer">
-                            Create
-                        </button>
+                                class="btn-brand px-4 py-2 text-sm cursor-pointer">Tạo</button>
                     </div>
                 </form>
             </div>

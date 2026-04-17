@@ -16,6 +16,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 from django.views.decorators.http import require_GET, require_POST
 from django_ratelimit.decorators import ratelimit
+from django.utils.translation import gettext_lazy as _
 
 from apps.common.validators import is_safe_url as _is_safe_url
 from apps.credentials.models import PlatformCredential
@@ -143,7 +144,7 @@ def connect_platform(request, workspace_id):
     # POST: initiate OAuth
     platform = request.POST.get("platform", "").strip()
     if platform not in dict(PlatformCredential.Platform.choices):
-        messages.error(request, "Invalid platform selected.")
+        messages.error(request, _("Invalid platform selected."))
         return redirect("social_accounts:connect", workspace_id=workspace_id)
 
     if platform not in configured_platforms:
@@ -200,25 +201,25 @@ def oauth_callback(request, platform):
     state_str = request.GET.get("state")
 
     if not code or not state_str:
-        messages.error(request, "Missing authorization code or state parameter.")
+        messages.error(request, _("Missing authorization code or state parameter."))
         return redirect("dashboard")
 
     # Validate state
     try:
         state_data = _unsign_state(state_str)
     except signing.BadSignature:
-        messages.error(request, "Invalid or expired OAuth state. Please try again.")
+        messages.error(request, _("Invalid or expired OAuth state. Please try again."))
         return redirect("dashboard")
 
     # Validate nonce from session
     session_data = request.session.pop(OAUTH_SESSION_KEY, {})
     if not session_data or session_data.get("nonce") != state_data.get("nonce"):
-        messages.error(request, "OAuth session mismatch. Please try again.")
+        messages.error(request, _("OAuth session mismatch. Please try again."))
         return redirect("dashboard")
 
     # Validate platform matches
     if state_data.get("platform") != platform:
-        messages.error(request, "Platform mismatch in OAuth callback.")
+        messages.error(request, _("Platform mismatch in OAuth callback."))
         return redirect("dashboard")
 
     # Validate user
@@ -277,12 +278,14 @@ def oauth_callback(request, platform):
             else:
                 messages.warning(
                     request,
-                    "No Facebook Pages were found for your account. "
-                    "Only Pages can be connected — personal profiles are not "
-                    "supported by the Facebook API. "
-                    "If you expected to see a Page, make sure you have admin "
-                    "access and try removing the app in Facebook Settings \u2192 "
-                    "Business Integrations, then reconnect.",
+                    _(
+                        "No Facebook Pages were found for your account. "
+                        "Only Pages can be connected — personal profiles are not "
+                        "supported by the Facebook API. "
+                        "If you expected to see a Page, make sure you have admin "
+                        "access and try removing the app in Facebook Settings \u2192 "
+                        "Business Integrations, then reconnect."
+                    ),
                 )
                 return redirect("social_accounts:list", workspace_id=workspace_id)
 
@@ -303,7 +306,7 @@ def oauth_callback(request, platform):
         logger.exception("OAuth callback failed for %s", platform)
         messages.error(
             request,
-            "Failed to connect account. Please try again.",
+            _("Failed to connect account. Please try again."),
         )
 
     return redirect("calendar:calendar", workspace_id=workspace_id)
@@ -319,7 +322,7 @@ def select_account(request):
     """Show page/account selection after multi-page OAuth."""
     page_data = request.session.get("oauth_page_select")
     if not page_data:
-        messages.error(request, "No accounts to select. Please start over.")
+        messages.error(request, _("No accounts to select. Please start over."))
         return redirect("dashboard")
 
     workspace_id = page_data["workspace_id"]
@@ -338,7 +341,7 @@ def select_account(request):
     # POST: create accounts for selected pages
     selected_ids = request.POST.getlist("selected_pages")
     if not selected_ids:
-        messages.error(request, "Please select at least one account.")
+        messages.error(request, _("Please select at least one account."))
         return render(
             request,
             "social_accounts/account_select.html",
@@ -403,7 +406,7 @@ def connect_bluesky(request, workspace_id):
     app_password = request.POST.get("app_password", "").strip()
 
     if not handle or not app_password:
-        messages.error(request, "Handle and app password are required.")
+        messages.error(request, _("Handle and app password are required."))
         return render(
             request,
             "social_accounts/bluesky_connect.html",
@@ -430,7 +433,7 @@ def connect_bluesky(request, workspace_id):
         logger.exception("Bluesky connection failed")
         messages.error(
             request,
-            "Failed to connect Bluesky account. Check your handle and app password.",
+            _("Failed to connect Bluesky account. Check your handle and app password."),
         )
         return render(
             request,
@@ -459,7 +462,7 @@ def connect_mastodon(request, workspace_id):
 
     instance_url = request.POST.get("instance_url", "").strip().rstrip("/")
     if not instance_url:
-        messages.error(request, "Instance URL is required.")
+        messages.error(request, _("Instance URL is required."))
         return render(
             request,
             "social_accounts/mastodon_connect.html",
@@ -472,7 +475,7 @@ def connect_mastodon(request, workspace_id):
 
     # Validate against SSRF - reject private/reserved IP ranges
     if not _is_safe_url(instance_url):
-        messages.error(request, "Invalid instance URL. Private or reserved addresses are not allowed.")
+        messages.error(request, _("Invalid instance URL. Private or reserved addresses are not allowed."))
         return render(
             request,
             "social_accounts/mastodon_connect.html",

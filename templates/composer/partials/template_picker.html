@@ -1,4 +1,5 @@
 <!-- Template picker modal content (loaded via HTMX) -->
+{% load i18n %}
 <div class="space-y-3">
     {% for tpl in templates %}
     <a href="{% url 'composer:use_template' workspace_id=workspace.id template_id=tpl.id %}"

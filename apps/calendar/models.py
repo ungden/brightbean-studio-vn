@@ -4,6 +4,7 @@ import uuid
 
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from apps.common.managers import WorkspaceScopedManager
 
@@ -31,7 +32,7 @@ class PostingSlot(models.Model):
         related_name="posting_slots",
     )
     day_of_week = models.IntegerField(choices=DayOfWeek.choices)
-    time = models.TimeField(help_text="Posting time (in workspace timezone).")
+    time = models.TimeField(help_text=_("Posting time (in workspace timezone)."))
     is_active = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -110,7 +111,7 @@ class QueueEntry(models.Model):
     assigned_slot_datetime = models.DateTimeField(
         null=True,
         blank=True,
-        help_text="The computed publish datetime from the queue's posting slots.",
+        help_text=_("The computed publish datetime from the queue's posting slots."),
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -145,17 +146,17 @@ class RecurrenceRule(models.Model):
     frequency = models.CharField(max_length=10, choices=Frequency.choices)
     interval = models.PositiveIntegerField(
         default=1,
-        help_text="Repeat every N frequency units (e.g., every 2 weeks).",
+        help_text=_("Repeat every N frequency units (e.g., every 2 weeks)."),
     )
     end_date = models.DateField(
         null=True,
         blank=True,
-        help_text="Stop generating recurrences after this date. Null = indefinite.",
+        help_text=_("Stop generating recurrences after this date. Null = indefinite."),
     )
     last_generated_at = models.DateTimeField(
         null=True,
         blank=True,
-        help_text="Timestamp of last recurrence generation run.",
+        help_text=_("Timestamp of last recurrence generation run."),
     )
     is_active = models.BooleanField(default=True)
 
@@ -187,7 +188,7 @@ class CustomCalendarEvent(models.Model):
     color = models.CharField(
         max_length=7,
         default="#3B82F6",
-        help_text="Hex color for the event bar.",
+        help_text=_("Hex color for the event bar."),
     )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,

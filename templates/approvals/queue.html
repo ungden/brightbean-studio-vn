@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}Approval Queue - {{ workspace.name }}{% endblock %}
 
 {% block content %}
@@ -22,8 +23,7 @@
     <div class="flex gap-1.5 mb-5">
         <a href="{% url 'approvals:queue' workspace_id=workspace.id %}?status=all"
            class="px-3.5 py-1.5 text-[0.8125rem] font-medium rounded-full transition-colors {% if status_filter == 'all' %}text-white{% else %}text-stone-600 hover:bg-stone-100{% endif %}"
-           {% if status_filter == 'all' %}style="background: var(--primary);"{% endif %}>
-            All <span class="ml-1 opacity-75">{{ pending_review_count|add:pending_client_count }}</span>
+           {% if status_filter == 'all' %}style="background: var(--primary);"{% endif %}>Tất cả<span class="ml-1 opacity-75">{{ pending_review_count|add:pending_client_count }}</span>
         </a>
         <a href="{% url 'approvals:queue' workspace_id=workspace.id %}?status=pending_review"
            class="px-3.5 py-1.5 text-[0.8125rem] font-medium rounded-full transition-colors {% if status_filter == 'pending_review' %}text-white{% else %}text-stone-600 hover:bg-stone-100{% endif %}"
@@ -97,9 +97,7 @@
                       placeholder="Reason for rejection..."></textarea>
             <div class="flex justify-end gap-2 mt-4">
                 <button type="button" @click="$refs.bulkRejectModal.close()"
-                        class="px-4 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 rounded-full transition-colors">
-                    Cancel
-                </button>
+                        class="px-4 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 rounded-full transition-colors">Hủy</button>
                 <button type="submit"
                         class="px-4 py-2 text-sm font-semibold text-white rounded-full bg-red-500 hover:bg-red-600 transition-colors"
                         @click="
@@ -116,9 +114,7 @@
                             form.appendChild(actionInput);
                             htmx.trigger(form, 'submit');
                             $refs.bulkRejectModal.close();
-                        ">
-                    Reject
-                </button>
+                        ">Từ chối</button>
             </div>
         </form>
     </dialog>

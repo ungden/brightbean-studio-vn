@@ -9,6 +9,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, render
 from django.utils import timezone as django_tz
 from django.views.decorators.http import require_http_methods
+from django.utils.translation import gettext_lazy as _
 
 from apps.composer.models import PlatformPost, Post, Tag
 from apps.members.decorators import require_org_role
@@ -114,24 +115,24 @@ def _handle_name_update(request, org):
     """Handle organization name change."""
     name = request.POST.get("name", "").strip()
     if not name:
-        messages.error(request, "Organization name cannot be empty.")
+        messages.error(request, _("Organization name cannot be empty."))
         return
 
     org.name = name
     org.save(update_fields=["name"])
-    messages.success(request, "Organization name updated.")
+    messages.success(request, _("Organization name updated."))
 
 
 def _handle_tz_update(request, org):
     """Handle default timezone change."""
     tz = request.POST.get("timezone", "").strip()
     if tz not in available_timezones():
-        messages.error(request, "Invalid timezone.")
+        messages.error(request, _("Invalid timezone."))
         return
 
     org.default_timezone = tz
     org.save(update_fields=["default_timezone"])
-    messages.success(request, "Default timezone updated.")
+    messages.success(request, _("Default timezone updated."))
 
 
 def _handle_org_deletion(request, org):
@@ -142,7 +143,7 @@ def _handle_org_deletion(request, org):
     org.deletion_requested_at = django_tz.now()
     org.deletion_scheduled_for = django_tz.now() + timedelta(days=14)
     org.save(update_fields=["deletion_requested_at", "deletion_scheduled_for"])
-    messages.success(request, "Organization scheduled for deletion in 14 days.")
+    messages.success(request, _("Organization scheduled for deletion in 14 days."))
     return redirect("organizations:settings")
 
 
@@ -154,7 +155,7 @@ def _handle_cancel_deletion(request, org):
     org.deletion_requested_at = None
     org.deletion_scheduled_for = None
     org.save(update_fields=["deletion_requested_at", "deletion_scheduled_for"])
-    messages.success(request, "Organization deletion cancelled.")
+    messages.success(request, _("Organization deletion cancelled."))
 
 
 @login_required

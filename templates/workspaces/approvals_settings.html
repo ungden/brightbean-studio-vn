@@ -1,8 +1,9 @@
 {% extends "layouts/workspace_settings.html" %}
+{% load i18n %}
 {% block title %}Approvals - {{ workspace.name }} - Brightbean{% endblock %}
 {% block content %}
 <div class="max-w-2xl">
-    <h2 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Approvals</h2>
+    <h2 class="text-xl font-semibold mb-2" style="color: var(--text-primary);">Duyệt bài</h2>
     <p class="text-sm mb-8" style="color: var(--text-secondary);">
         Control whether posts need to be reviewed before they can be scheduled or published.
     </p>
@@ -62,7 +63,7 @@
 
     <p class="text-xs mt-6" style="color: var(--text-tertiary);">
         Reviewers are workspace members with the "Approve posts" permission.
-        Manage them on the <a href="{% url 'members:list' %}" class="underline" style="color: var(--text-secondary);">Members</a> page.
+        Manage them on the <a href="{% url 'members:list' %}" class="underline" style="color: var(--text-secondary);">Thành viên</a> page.
     </p>
 </div>
 {% endblock %}

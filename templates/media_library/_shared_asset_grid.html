@@ -1,3 +1,4 @@
+{% load i18n %}
 {% comment %}Asset grid for shared org library. No workspace-scoped URLs. Expects: page, query{% endcomment %}
 
 {% if page.object_list %}
@@ -19,9 +20,7 @@
      style="border-color: var(--border, #E7E5E4); color: var(--text-secondary, #57534E);"
      hx-get="{% url 'media_library_org:shared_index' %}?page={{ page.previous_page_number }}&q={{ query|urlencode }}"
      hx-target="#shared-grid"
-     hx-swap="innerHTML">
-    Previous
-  </a>
+     hx-swap="innerHTML">Trước</a>
   {% endif %}
   <span class="text-xs px-3" style="color: var(--text-tertiary, #78716C);">
     Page {{ page.number }} of {{ page.paginator.num_pages }}
@@ -32,9 +31,7 @@
      style="border-color: var(--border, #E7E5E4); color: var(--text-secondary, #57534E);"
      hx-get="{% url 'media_library_org:shared_index' %}?page={{ page.next_page_number }}&q={{ query|urlencode }}"
      hx-target="#shared-grid"
-     hx-swap="innerHTML">
-    Next
-  </a>
+     hx-swap="innerHTML">Tiếp</a>
   {% endif %}
 </div>
 {% endif %}

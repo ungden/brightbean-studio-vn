@@ -2,6 +2,7 @@ import uuid
 
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class EventType(models.TextChoices):
@@ -128,12 +129,12 @@ class QuietHours(models.Model):
     timezone = models.CharField(max_length=50, default="UTC")
     digest_mode = models.BooleanField(
         default=False,
-        help_text="Batch email notifications into a daily digest.",
+        help_text=_("Batch email notifications into a daily digest."),
     )
 
     class Meta:
         db_table = "notifications_quiet_hours"
-        verbose_name_plural = "Quiet hours"
+        verbose_name_plural = _("Quiet hours")
 
     def __str__(self):
         if self.is_enabled:

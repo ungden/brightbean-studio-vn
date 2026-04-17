@@ -1,0 +1,620 @@
+# Brightbean Studio Vietnamese Translation
+# Copyright (C) 2026
+# This file is distributed under the same license as the brightbean-studio package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: brightbean-studio 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-18 00:00+0700\n"
+"PO-Revision-Date: 2026-04-18 00:00+0700\n"
+"Last-Translator: Brightbean VN\n"
+"Language-Team: Vietnamese\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# ============================================================
+# COMMON UI TERMS
+# ============================================================
+msgid "Save"
+msgstr "Lưu"
+
+msgid "Cancel"
+msgstr "Hủy"
+
+msgid "Delete"
+msgstr "Xóa"
+
+msgid "Edit"
+msgstr "Sửa"
+
+msgid "Create"
+msgstr "Tạo"
+
+msgid "Update"
+msgstr "Cập nhật"
+
+msgid "Submit"
+msgstr "Gửi"
+
+msgid "Close"
+msgstr "Đóng"
+
+msgid "Back"
+msgstr "Quay lại"
+
+msgid "Next"
+msgstr "Tiếp"
+
+msgid "Continue"
+msgstr "Tiếp tục"
+
+msgid "Confirm"
+msgstr "Xác nhận"
+
+msgid "Apply"
+msgstr "Áp dụng"
+
+msgid "Reset"
+msgstr "Đặt lại"
+
+msgid "Search"
+msgstr "Tìm kiếm"
+
+msgid "Filter"
+msgstr "Lọc"
+
+msgid "Loading..."
+msgstr "Đang tải..."
+
+# ============================================================
+# AUTHENTICATION
+# ============================================================
+msgid "Sign in"
+msgstr "Đăng nhập"
+
+msgid "Sign up"
+msgstr "Đăng ký"
+
+msgid "Sign out"
+msgstr "Đăng xuất"
+
+msgid "Log in"
+msgstr "Đăng nhập"
+
+msgid "Log out"
+msgstr "Đăng xuất"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Password"
+msgstr "Mật khẩu"
+
+msgid "Confirm password"
+msgstr "Xác nhận mật khẩu"
+
+msgid "Forgot password?"
+msgstr "Quên mật khẩu?"
+
+msgid "Remember me"
+msgstr "Ghi nhớ tôi"
+
+msgid "Reset password"
+msgstr "Đặt lại mật khẩu"
+
+msgid "Invalid email or password."
+msgstr "Email hoặc mật khẩu không đúng."
+
+# ============================================================
+# NAVIGATION
+# ============================================================
+msgid "Dashboard"
+msgstr "Trang chủ"
+
+msgid "Calendar"
+msgstr "Lịch"
+
+msgid "Compose"
+msgstr "Soạn bài"
+
+msgid "Inbox"
+msgstr "Hộp thư"
+
+msgid "Approvals"
+msgstr "Duyệt bài"
+
+msgid "Media Library"
+msgstr "Thư viện phương tiện"
+
+msgid "Settings"
+msgstr "Cài đặt"
+
+msgid "Notifications"
+msgstr "Thông báo"
+
+msgid "Profile"
+msgstr "Hồ sơ"
+
+msgid "Members"
+msgstr "Thành viên"
+
+msgid "Organization"
+msgstr "Tổ chức"
+
+msgid "Workspace"
+msgstr "Không gian làm việc"
+
+msgid "Workspaces"
+msgstr "Không gian làm việc"
+
+msgid "Create workspace"
+msgstr "Tạo không gian làm việc"
+
+msgid "Workspace settings"
+msgstr "Cài đặt không gian làm việc"
+
+msgid "Channels"
+msgstr "Kênh"
+
+msgid "Connect channels"
+msgstr "Kết nối kênh"
+
+msgid "More channels"
+msgstr "Thêm kênh"
+
+msgid "Social Inbox"
+msgstr "Hộp thư mạng xã hội"
+
+# ============================================================
+# POSTS & CONTENT
+# ============================================================
+msgid "Post"
+msgstr "Bài viết"
+
+msgid "Posts"
+msgstr "Bài viết"
+
+msgid "Draft"
+msgstr "Bản nháp"
+
+msgid "Drafts"
+msgstr "Bản nháp"
+
+msgid "Published"
+msgstr "Đã đăng"
+
+msgid "Scheduled"
+msgstr "Đã lên lịch"
+
+msgid "Failed"
+msgstr "Thất bại"
+
+msgid "Idea"
+msgstr "Ý tưởng"
+
+msgid "Ideas"
+msgstr "Ý tưởng"
+
+msgid "Create Idea"
+msgstr "Tạo ý tưởng"
+
+msgid "Create idea"
+msgstr "Tạo ý tưởng"
+
+msgid "Capture a content idea"
+msgstr "Ghi lại ý tưởng nội dung"
+
+msgid "Publish content to a channel"
+msgstr "Đăng nội dung lên một kênh"
+
+msgid "Publish"
+msgstr "Đăng bài"
+
+msgid "Schedule"
+msgstr "Lên lịch"
+
+msgid "Caption"
+msgstr "Nội dung"
+
+msgid "Media"
+msgstr "Phương tiện"
+
+msgid "Tags"
+msgstr "Thẻ"
+
+msgid "Category"
+msgstr "Danh mục"
+
+msgid "Categories"
+msgstr "Danh mục"
+
+msgid "Template"
+msgstr "Mẫu"
+
+msgid "Templates"
+msgstr "Mẫu"
+
+msgid "First comment"
+msgstr "Bình luận đầu tiên"
+
+msgid "Internal notes"
+msgstr "Ghi chú nội bộ"
+
+msgid "Scheduled at"
+msgstr "Thời gian đăng"
+
+# ============================================================
+# APPROVAL WORKFLOW
+# ============================================================
+msgid "Approve"
+msgstr "Duyệt"
+
+msgid "Reject"
+msgstr "Từ chối"
+
+msgid "Approved"
+msgstr "Đã duyệt"
+
+msgid "Rejected"
+msgstr "Đã từ chối"
+
+msgid "Pending review"
+msgstr "Đang chờ duyệt"
+
+msgid "Pending client approval"
+msgstr "Đang chờ khách hàng duyệt"
+
+msgid "Changes requested"
+msgstr "Yêu cầu chỉnh sửa"
+
+msgid "Request changes"
+msgstr "Yêu cầu chỉnh sửa"
+
+msgid "Submit for review"
+msgstr "Gửi duyệt"
+
+msgid "Resubmit"
+msgstr "Gửi lại"
+
+msgid "Add comment"
+msgstr "Thêm bình luận"
+
+msgid "Comments"
+msgstr "Bình luận"
+
+# ============================================================
+# MEDIA LIBRARY
+# ============================================================
+msgid "Upload"
+msgstr "Tải lên"
+
+msgid "Upload media"
+msgstr "Tải lên phương tiện"
+
+msgid "Drag & drop"
+msgstr "Kéo & thả"
+
+msgid "Drag and drop files here"
+msgstr "Kéo và thả tệp vào đây"
+
+msgid "Add another file"
+msgstr "Thêm tệp khác"
+
+msgid "File"
+msgstr "Tệp"
+
+msgid "Files"
+msgstr "Tệp"
+
+msgid "Folder"
+msgstr "Thư mục"
+
+msgid "Folders"
+msgstr "Thư mục"
+
+msgid "Image"
+msgstr "Hình ảnh"
+
+msgid "Video"
+msgstr "Video"
+
+msgid "Alt text"
+msgstr "Văn bản thay thế"
+
+msgid "File size"
+msgstr "Dung lượng tệp"
+
+msgid "File too large."
+msgstr "Tệp quá lớn."
+
+msgid "Invalid file type."
+msgstr "Loại tệp không hợp lệ."
+
+# ============================================================
+# INBOX
+# ============================================================
+msgid "Unread"
+msgstr "Chưa đọc"
+
+msgid "Open"
+msgstr "Mở"
+
+msgid "Resolved"
+msgstr "Đã giải quyết"
+
+msgid "Archived"
+msgstr "Đã lưu trữ"
+
+msgid "Reply"
+msgstr "Trả lời"
+
+msgid "Replies"
+msgstr "Trả lời"
+
+msgid "Assign"
+msgstr "Giao"
+
+msgid "Assigned to"
+msgstr "Giao cho"
+
+msgid "Mention"
+msgstr "Nhắc đến"
+
+msgid "Direct message"
+msgstr "Tin nhắn trực tiếp"
+
+msgid "Comment"
+msgstr "Bình luận"
+
+msgid "Review"
+msgstr "Đánh giá"
+
+# ============================================================
+# SETTINGS & MEMBERS
+# ============================================================
+msgid "Role"
+msgstr "Vai trò"
+
+msgid "Roles"
+msgstr "Vai trò"
+
+msgid "Owner"
+msgstr "Chủ sở hữu"
+
+msgid "Admin"
+msgstr "Quản trị viên"
+
+msgid "Manager"
+msgstr "Người quản lý"
+
+msgid "Editor"
+msgstr "Biên tập viên"
+
+msgid "Contributor"
+msgstr "Cộng tác viên"
+
+msgid "Client"
+msgstr "Khách hàng"
+
+msgid "Viewer"
+msgstr "Người xem"
+
+msgid "Invite member"
+msgstr "Mời thành viên"
+
+msgid "Invite"
+msgstr "Mời"
+
+msgid "Invitation sent"
+msgstr "Đã gửi lời mời"
+
+msgid "Pending invitation"
+msgstr "Lời mời đang chờ"
+
+msgid "Member"
+msgstr "Thành viên"
+
+msgid "Team"
+msgstr "Nhóm"
+
+# ============================================================
+# CALENDAR & SCHEDULING
+# ============================================================
+msgid "Today"
+msgstr "Hôm nay"
+
+msgid "Yesterday"
+msgstr "Hôm qua"
+
+msgid "Tomorrow"
+msgstr "Ngày mai"
+
+msgid "This week"
+msgstr "Tuần này"
+
+msgid "Last week"
+msgstr "Tuần trước"
+
+msgid "This month"
+msgstr "Tháng này"
+
+msgid "Month"
+msgstr "Tháng"
+
+msgid "Week"
+msgstr "Tuần"
+
+msgid "Day"
+msgstr "Ngày"
+
+msgid "Year"
+msgstr "Năm"
+
+msgid "Queue"
+msgstr "Hàng đợi"
+
+msgid "Queues"
+msgstr "Hàng đợi"
+
+msgid "Posting slot"
+msgstr "Khung giờ đăng"
+
+msgid "Posting slots"
+msgstr "Khung giờ đăng"
+
+msgid "Recurring post"
+msgstr "Bài viết lặp lại"
+
+# ============================================================
+# COMMON MESSAGES
+# ============================================================
+msgid "Yes"
+msgstr "Có"
+
+msgid "No"
+msgstr "Không"
+
+msgid "All"
+msgstr "Tất cả"
+
+msgid "None"
+msgstr "Không có"
+
+msgid "Active"
+msgstr "Hoạt động"
+
+msgid "Inactive"
+msgstr "Không hoạt động"
+
+msgid "Pending"
+msgstr "Đang chờ"
+
+msgid "No results"
+msgstr "Không có kết quả"
+
+msgid "No results found"
+msgstr "Không tìm thấy kết quả"
+
+msgid "No data"
+msgstr "Không có dữ liệu"
+
+msgid "No workspaces"
+msgstr "Chưa có không gian làm việc"
+
+msgid "No tags yet. Type to create one."
+msgstr "Chưa có thẻ nào. Gõ để tạo mới."
+
+msgid "Create new tag"
+msgstr "Tạo thẻ mới"
+
+msgid "New"
+msgstr "Mới"
+
+msgid "Error"
+msgstr "Lỗi"
+
+msgid "Success"
+msgstr "Thành công"
+
+msgid "Warning"
+msgstr "Cảnh báo"
+
+msgid "Info"
+msgstr "Thông tin"
+
+msgid "Something went wrong."
+msgstr "Đã có lỗi xảy ra."
+
+msgid "Please try again."
+msgstr "Vui lòng thử lại."
+
+msgid "You do not have permission to perform this action."
+msgstr "Bạn không có quyền thực hiện hành động này."
+
+msgid "Are you sure?"
+msgstr "Bạn có chắc không?"
+
+msgid "This action cannot be undone."
+msgstr "Hành động này không thể hoàn tác."
+
+# ============================================================
+# MODEL VERBOSE NAMES
+# ============================================================
+msgid "content categories"
+msgstr "danh mục nội dung"
+
+msgid "Organizations"
+msgstr "Tổ chức"
+
+msgid "Content Calendar"
+msgstr "Lịch nội dung"
+
+msgid "Client Portal"
+msgstr "Cổng khách hàng"
+
+msgid "Publishing Engine"
+msgstr "Động cơ đăng bài"
+
+# ============================================================
+# HELP TEXT / DESCRIPTIONS
+# ============================================================
+msgid "Hex color for calendar display, e.g. #FF5733"
+msgstr "Mã màu hex để hiển thị trên lịch, ví dụ #FF5733"
+
+msgid "Ordering position on the idea."
+msgstr "Vị trí sắp xếp trên ý tưởng."
+
+msgid "Posting time (in workspace timezone)."
+msgstr "Thời gian đăng (theo múi giờ của không gian làm việc)."
+
+msgid "Hex color for the event bar."
+msgstr "Mã màu hex cho thanh sự kiện."
+
+msgid "Write a reply..."
+msgstr "Viết câu trả lời..."
+
+msgid "Add an internal note..."
+msgstr "Thêm ghi chú nội bộ..."
+
+msgid "Template name..."
+msgstr "Tên mẫu..."
+
+msgid "Custom caption for this platform..."
+msgstr "Nội dung riêng cho nền tảng này..."
+
+# ============================================================
+# PLATFORM NAMES (kept as-is - brand names)
+# ============================================================
+msgid "Facebook"
+msgstr "Facebook"
+
+msgid "Instagram"
+msgstr "Instagram"
+
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+msgid "TikTok"
+msgstr "TikTok"
+
+msgid "YouTube"
+msgstr "YouTube"
+
+msgid "Pinterest"
+msgstr "Pinterest"
+
+msgid "Threads"
+msgstr "Threads"
+
+msgid "Bluesky"
+msgstr "Bluesky"
+
+msgid "Mastodon"
+msgstr "Mastodon"
+
+msgid "Google Business Profile"
+msgstr "Google Business Profile"

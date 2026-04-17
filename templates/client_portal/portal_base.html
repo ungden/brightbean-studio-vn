@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -43,14 +44,10 @@
                         </a>
                         <a href="{% url 'client_portal:approval_queue' %}"
                            class="px-3 py-1.5 text-[0.8125rem] font-medium rounded-full transition-colors {% if request.resolver_match.url_name == 'approval_queue' %}text-white{% else %}hover:bg-black/[0.04]{% endif %}"
-                           {% if request.resolver_match.url_name == 'approval_queue' %}style="background: var(--primary); color: white;"{% else %}style="color: var(--text-secondary);"{% endif %}>
-                            Approvals
-                        </a>
+                           {% if request.resolver_match.url_name == 'approval_queue' %}style="background: var(--primary); color: white;"{% else %}style="color: var(--text-secondary);"{% endif %}>Duyệt bài</a>
                         <a href="{% url 'client_portal:published' %}"
                            class="px-3 py-1.5 text-[0.8125rem] font-medium rounded-full transition-colors {% if request.resolver_match.url_name == 'published' %}text-white{% else %}hover:bg-black/[0.04]{% endif %}"
-                           {% if request.resolver_match.url_name == 'published' %}style="background: var(--primary); color: white;"{% else %}style="color: var(--text-secondary);"{% endif %}>
-                            Published
-                        </a>
+                           {% if request.resolver_match.url_name == 'published' %}style="background: var(--primary); color: white;"{% else %}style="color: var(--text-secondary);"{% endif %}>Đã đăng</a>
                         <a href="{% url 'client_portal:activity' %}"
                            class="px-3 py-1.5 text-[0.8125rem] font-medium rounded-full transition-colors {% if request.resolver_match.url_name == 'activity' %}text-white{% else %}hover:bg-black/[0.04]{% endif %}"
                            {% if request.resolver_match.url_name == 'activity' %}style="background: var(--primary); color: white;"{% else %}style="color: var(--text-secondary);"{% endif %}>
@@ -59,9 +56,7 @@
                     </nav>
                     <a href="{% url 'accounts:logout' %}"
                        class="px-3 py-1.5 text-[0.8125rem] font-medium rounded-full transition-colors hover:bg-black/[0.04]"
-                       style="color: var(--text-tertiary);">
-                        Log out
-                    </a>
+                       style="color: var(--text-tertiary);">Đăng xuất</a>
                 </div>
             </div>
 
@@ -74,14 +69,10 @@
                 </a>
                 <a href="{% url 'client_portal:approval_queue' %}"
                    class="px-3 py-1.5 text-[0.8125rem] font-medium rounded-full flex-shrink-0 transition-colors {% if request.resolver_match.url_name == 'approval_queue' %}text-white{% else %}hover:bg-black/[0.04]{% endif %}"
-                   {% if request.resolver_match.url_name == 'approval_queue' %}style="background: var(--primary);"{% else %}style="color: var(--text-secondary);"{% endif %}>
-                    Approvals
-                </a>
+                   {% if request.resolver_match.url_name == 'approval_queue' %}style="background: var(--primary);"{% else %}style="color: var(--text-secondary);"{% endif %}>Duyệt bài</a>
                 <a href="{% url 'client_portal:published' %}"
                    class="px-3 py-1.5 text-[0.8125rem] font-medium rounded-full flex-shrink-0 transition-colors {% if request.resolver_match.url_name == 'published' %}text-white{% else %}hover:bg-black/[0.04]{% endif %}"
-                   {% if request.resolver_match.url_name == 'published' %}style="background: var(--primary);"{% else %}style="color: var(--text-secondary);"{% endif %}>
-                    Published
-                </a>
+                   {% if request.resolver_match.url_name == 'published' %}style="background: var(--primary);"{% else %}style="color: var(--text-secondary);"{% endif %}>Đã đăng</a>
                 <a href="{% url 'client_portal:activity' %}"
                    class="px-3 py-1.5 text-[0.8125rem] font-medium rounded-full flex-shrink-0 transition-colors {% if request.resolver_match.url_name == 'activity' %}text-white{% else %}hover:bg-black/[0.04]{% endif %}"
                    {% if request.resolver_match.url_name == 'activity' %}style="background: var(--primary);"{% else %}style="color: var(--text-secondary);"{% endif %}>

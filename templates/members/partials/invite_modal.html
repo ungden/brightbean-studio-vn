@@ -1,4 +1,5 @@
 <!-- Invite Team Member Modal -->
+{% load i18n %}
 <template x-teleport="body">
     <div x-show="showInviteModal" x-transition.opacity
          class="fixed inset-0 z-50 flex items-center justify-center"
@@ -93,9 +94,7 @@
                             class="px-5 py-2 text-sm font-medium rounded-full cursor-pointer transition-colors"
                             style="background: var(--neutral-100); color: var(--text-primary);"
                             onmouseenter="this.style.background='var(--neutral-200)'"
-                            onmouseleave="this.style.background='var(--neutral-100)'">
-                        Cancel
-                    </button>
+                            onmouseleave="this.style.background='var(--neutral-100)'">Hủy</button>
                     <button type="submit"
                             class="px-5 py-2 text-sm font-medium rounded-full cursor-pointer transition-colors"
                             style="background: var(--primary); color: white;"

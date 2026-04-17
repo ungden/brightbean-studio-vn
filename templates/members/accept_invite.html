@@ -1,3 +1,4 @@
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +96,7 @@
             <div class="info-label">Organization</div>
             <div class="info-value" style="margin-bottom: 12px;">{{ invitation.organization.name }}</div>
 
-            <div class="info-label">Role</div>
+            <div class="info-label">Vai trò</div>
             <div class="info-value" style="margin-bottom: 12px; text-transform: capitalize;">{{ invitation.org_role }}</div>
 
             {% if ws_display %}

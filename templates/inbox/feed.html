@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load humanize %}
 
 {% block title %}Inbox - {{ workspace.name }} - Brightbean{% endblock %}
@@ -128,14 +129,14 @@
     <!-- Header -->
     <div class="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-5 py-3 border-b border-stone-200 flex-shrink-0">
         <div class="flex items-center gap-3 sm:gap-4">
-            <h1 class="text-base font-semibold text-stone-900" style="letter-spacing: -0.01em;">Inbox</h1>
+            <h1 class="text-base font-semibold text-stone-900" style="letter-spacing: -0.01em;">Hộp thư</h1>
             <div class="flex items-center gap-1 bg-stone-50 rounded-full p-0.5">
                 <a href="{% url 'inbox:feed' workspace_id=workspace.id %}"
                    class="inbox-tab {% if current_view == 'all' %}active{% endif %}"
                    hx-get="{% url 'inbox:feed' workspace_id=workspace.id %}?view=all"
                    hx-target="#inbox-message-list"
                    hx-swap="innerHTML"
-                   hx-push-url="true">All</a>
+                   hx-push-url="true">Tất cả</a>
                 <a href="{% url 'inbox:feed' workspace_id=workspace.id %}?view=mine"
                    class="inbox-tab {% if current_view == 'mine' %}active{% endif %}"
                    hx-get="{% url 'inbox:feed' workspace_id=workspace.id %}?view=mine"
@@ -147,7 +148,7 @@
                    hx-get="{% url 'inbox:feed' workspace_id=workspace.id %}?view=unassigned"
                    hx-target="#inbox-message-list"
                    hx-swap="innerHTML"
-                   hx-push-url="true">Unassigned</a>
+                   hx-push-url="true">Chưa giao</a>
             </div>
         </div>
         <div class="flex items-center gap-2">
@@ -187,7 +188,7 @@
                 <span x-text="selectedCount + ' selected'"></span>
                 <button @click="bulkAction('mark_read')">Mark Read</button>
                 <button @click="bulkAction('resolve')">Resolve</button>
-                <button @click="bulkAction('archive')">Archive</button>
+                <button @click="bulkAction('archive')">Lưu trữ</button>
                 <button @click="closeBulk()" class="ml-auto" style="border: none;">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
@@ -201,9 +202,7 @@
             <div class="flex md:hidden items-center gap-2 px-3 py-2.5 border-b border-stone-200 flex-shrink-0">
                 <button @click="activePanel = 'list'"
                         class="flex items-center gap-1.5 text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors cursor-pointer">
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-                    Back
-                </button>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>Quay lại</button>
             </div>
             <!-- Empty state shown when no message is selected -->
             <div class="inbox-empty-detail">

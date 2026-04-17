@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 
 {% if page.object_list %}
@@ -16,10 +17,10 @@
     <!-- List header -->
     <div class="grid grid-cols-12 gap-3 px-4 py-2 text-xs font-bold uppercase tracking-wider border-b"
          style="color: var(--text-tertiary, #78716C); border-color: var(--surface-2, #F5F5F4); background: var(--surface-1, #FAFAF9);">
-      <div class="col-span-5">Name</div>
-      <div class="col-span-2">Type</div>
+      <div class="col-span-5">Tên</div>
+      <div class="col-span-2">Loại</div>
       <div class="col-span-2">Size</div>
-      <div class="col-span-2">Uploaded</div>
+      <div class="col-span-2">Đã tải lên</div>
       <div class="col-span-1"></div>
     </div>
     {% for asset in page.object_list %}
@@ -37,9 +38,7 @@
      style="border-color: var(--border, #E7E5E4); color: var(--text-secondary, #57534E);"
      hx-get="{% url 'media_library:index' workspace_id=workspace.id %}?page={{ page.previous_page_number }}&q={{ query|urlencode }}&sort={{ current_sort|urlencode }}"
      hx-target="#asset-grid"
-     hx-swap="innerHTML">
-    Previous
-  </a>
+     hx-swap="innerHTML">Trước</a>
   {% endif %}
 
   <span class="text-xs px-3" style="color: var(--text-tertiary, #78716C);">
@@ -52,9 +51,7 @@
      style="border-color: var(--border, #E7E5E4); color: var(--text-secondary, #57534E);"
      hx-get="{% url 'media_library:index' workspace_id=workspace.id %}?page={{ page.next_page_number }}&q={{ query|urlencode }}&sort={{ current_sort|urlencode }}"
      hx-target="#asset-grid"
-     hx-swap="innerHTML">
-    Next
-  </a>
+     hx-swap="innerHTML">Tiếp</a>
   {% endif %}
 </div>
 {% endif %}

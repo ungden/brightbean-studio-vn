@@ -1,3 +1,4 @@
+{% load i18n %}
 <div class="px-6 py-4 group" id="member-{{ member.membership.id }}"
      style="border-bottom: 1px solid var(--border);"
      x-data="{ showActions: false, showWorkspaces: false }">
@@ -25,7 +26,7 @@
         <!-- Org Role Badge -->
         <div class="flex-shrink-0">
             {% if member.membership.org_role == "owner" %}
-            <span class="text-xs font-medium px-2.5 py-1 rounded-full" style="background: #FEF3C7; color: #92400E;">Owner</span>
+            <span class="text-xs font-medium px-2.5 py-1 rounded-full" style="background: #FEF3C7; color: #92400E;">Chủ sở hữu</span>
             {% elif member.membership.org_role == "admin" %}
             <span class="text-xs font-medium px-2.5 py-1 rounded-full" style="background: #DBEAFE; color: #1E40AF;">Admin</span>
             {% else %}
@@ -66,9 +67,7 @@
                         </select>
                         <button type="submit"
                                 class="text-xs px-2 py-1 rounded font-medium cursor-pointer"
-                                style="background: var(--neutral-100); color: var(--text-primary);">
-                            Save
-                        </button>
+                                style="background: var(--neutral-100); color: var(--text-primary);">Lưu</button>
                     </div>
                 </form>
 
@@ -137,7 +136,7 @@
                     </button>
                 </div>
                 <div id="ws-modal-content">
-                    <p class="text-sm" style="color: var(--text-tertiary);">Loading...</p>
+                    <p class="text-sm" style="color: var(--text-tertiary);">Đang tải...</p>
                 </div>
             </div>
         </div>

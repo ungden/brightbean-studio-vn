@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load static i18n allauth account socialaccount %}
 
 {% block title %}Sign Up - Brightbean{% endblock %}
@@ -10,9 +11,7 @@
         <div class="inline-flex items-center justify-center w-12 h-12 mb-4">
             <img src="{% static 'img/brightbean-logo.webp' %}" alt="Brightbean logo" class="w-12 h-12 object-contain">
         </div>
-        <h1 class="text-2xl font-bold tracking-tight" style="color: var(--text-primary);">
-            Create your account
-        </h1>
+        <h1 class="text-2xl font-bold tracking-tight" style="color: var(--text-primary);">Tạo tài khoản của bạn</h1>
         <p class="text-sm mt-1" style="color: var(--text-secondary);">
             Start managing your social media in minutes
         </p>
@@ -108,9 +107,7 @@
     </div>
 
     <!-- Footer link -->
-    <p class="text-center text-sm mt-6" style="color: var(--text-secondary);">
-        Already have an account?
-        <a href="{{ login_url }}" class="font-semibold hover:underline" style="color: var(--primary);">Sign in</a>
+    <p class="text-center text-sm mt-6" style="color: var(--text-secondary);">Đã có tài khoản?<a href="{{ login_url }}" class="font-semibold hover:underline" style="color: var(--primary);">Đăng nhập</a>
     </p>
 </div>
 {% endblock %}

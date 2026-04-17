@@ -1,3 +1,4 @@
+{% load i18n %}
 {% comment %}Tag editor with autocomplete. Expects: asset, workspace{% endcomment %}
 
 <div x-data="tagInput({{ asset.tags|safe }})" class="space-y-2">

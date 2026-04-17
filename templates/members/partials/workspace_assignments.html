@@ -1,4 +1,5 @@
 <!-- Workspace Assignment Form (loaded via HTMX into modal) -->
+{% load i18n %}
 <form hx-post="{% url 'members:manage_workspaces' membership_id=membership.id %}"
       hx-target="#member-{{ membership.id }}"
       hx-swap="outerHTML">

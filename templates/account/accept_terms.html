@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -60,15 +61,13 @@
                     </span>
                 </label>
 
-                <button type="submit" class="btn-brand">
-                    Continue
-                </button>
+                <button type="submit" class="btn-brand">Tiếp tục</button>
             </form>
         </div>
 
         <!-- Sign out link -->
         <p class="text-center text-sm mt-6" style="color: var(--text-secondary);">
-            <a href="{% url 'accounts:logout' %}" class="font-semibold hover:underline" style="color: var(--primary);">Sign out</a>
+            <a href="{% url 'accounts:logout' %}" class="font-semibold hover:underline" style="color: var(--primary);">Đăng xuất</a>
         </p>
     </div>
 </main>

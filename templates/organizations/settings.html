@@ -1,8 +1,9 @@
 {% extends "layouts/settings.html" %}
+{% load i18n %}
 {% block title %}General - Settings - Brightbean{% endblock %}
 {% block content %}
 <div class="max-w-2xl">
-    <h2 class="text-xl font-semibold mb-8" style="color: var(--text-primary);">General</h2>
+    <h2 class="text-xl font-semibold mb-8" style="color: var(--text-primary);">Chung</h2>
 
     <!-- Organization Name section -->
     <form method="POST" class="mb-10">
@@ -153,9 +154,7 @@
                                 class="px-5 py-2 text-sm font-medium rounded-full cursor-pointer transition-colors"
                                 style="background: var(--neutral-100); color: var(--text-primary);"
                                 onmouseenter="this.style.background='var(--neutral-200)'"
-                                onmouseleave="this.style.background='var(--neutral-100)'">
-                            Cancel
-                        </button>
+                                onmouseleave="this.style.background='var(--neutral-100)'">Hủy</button>
                         <form method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="action" value="delete_organization">

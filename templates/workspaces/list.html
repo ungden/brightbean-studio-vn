@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block page_title %}Workspaces{% endblock %}
 {% block content %}
 <div style="max-width: 720px;">
@@ -59,14 +60,12 @@
                 <input
                     type="text"
                     name="name"
-                    placeholder="Workspace name"
+                    placeholder="Tên không gian làm việc"
                     required
                     class="form-input-styled"
                 >
             </div>
-            <button type="submit" class="btn-brand" style="width: auto; white-space: nowrap;">
-                Create
-            </button>
+            <button type="submit" class="btn-brand" style="width: auto; white-space: nowrap;">Tạo</button>
         </form>
     </div>
 </div>

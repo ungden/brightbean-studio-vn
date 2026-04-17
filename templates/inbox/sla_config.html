@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block title %}SLA Settings - {{ workspace.name }} - Brightbean{% endblock %}
 
@@ -60,7 +61,7 @@
                     Save Settings
                 </button>
                 <a href="{% url 'inbox:feed' workspace_id=workspace.id %}"
-                   class="text-[13px] font-medium text-stone-500 hover:text-stone-700 transition-colors">Cancel</a>
+                   class="text-[13px] font-medium text-stone-500 hover:text-stone-700 transition-colors">Hủy</a>
             </div>
         </form>
     </div>

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% if sla_config and sla_config.is_active %}
 <span class="sla-countdown badge-pill"
       :class="getSlaClass('{{ message.received_at|date:'c' }}')"

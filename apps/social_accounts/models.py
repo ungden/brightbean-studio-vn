@@ -2,6 +2,7 @@ import uuid
 from typing import Any
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from apps.common.encryption import EncryptedTextField
 from apps.common.managers import WorkspaceScopedManager
@@ -27,7 +28,7 @@ class SocialAccount(models.Model):
     )
     account_platform_id = models.CharField(
         max_length=255,
-        help_text="The account's native ID on the platform.",
+        help_text=_("The account's native ID on the platform."),
     )
     account_name = models.CharField(max_length=255)
     account_handle = models.CharField(max_length=255, blank=True, default="")

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load humanize %}
 <div id="post-row-{{ post.id }}" class="bg-white border border-stone-200 rounded-xl p-4 hover:shadow-md transition-all group"
      x-data="{ expanded: false, showActions: false }">
@@ -20,11 +21,11 @@
                 {% elif post.status == 'pending_client' %}
                 <span class="inline-flex items-center px-2 py-0.5 text-[0.6875rem] font-semibold rounded-full bg-amber-50 text-amber-700">Pending Client</span>
                 {% elif post.status == 'approved' %}
-                <span class="inline-flex items-center px-2 py-0.5 text-[0.6875rem] font-semibold rounded-full bg-emerald-50 text-emerald-700">Approved</span>
+                <span class="inline-flex items-center px-2 py-0.5 text-[0.6875rem] font-semibold rounded-full bg-emerald-50 text-emerald-700">Đã duyệt</span>
                 {% elif post.status == 'changes_requested' %}
                 <span class="inline-flex items-center px-2 py-0.5 text-[0.6875rem] font-semibold rounded-full bg-orange-50 text-orange-700">Changes Requested</span>
                 {% elif post.status == 'rejected' %}
-                <span class="inline-flex items-center px-2 py-0.5 text-[0.6875rem] font-semibold rounded-full bg-red-50 text-red-700">Rejected</span>
+                <span class="inline-flex items-center px-2 py-0.5 text-[0.6875rem] font-semibold rounded-full bg-red-50 text-red-700">Đã từ chối</span>
                 {% endif %}
 
                 <!-- Platform icons -->
@@ -91,9 +92,7 @@
             <button hx-post="{% url 'approvals:approve' workspace_id=workspace.id post_id=post.id %}"
                     hx-target="#post-row-{{ post.id }}"
                     hx-swap="outerHTML"
-                    class="px-3 py-1.5 text-[0.8125rem] font-semibold rounded-full bg-emerald-500 hover:bg-emerald-600 text-white transition-colors">
-                Approve
-            </button>
+                    class="px-3 py-1.5 text-[0.8125rem] font-semibold rounded-full bg-emerald-500 hover:bg-emerald-600 text-white transition-colors">Duyệt</button>
 
             <!-- Request Changes (opens modal) -->
             <button @click="showActions = !showActions"
@@ -125,13 +124,9 @@
                         hx-swap="outerHTML"
                         hx-include="#review-comment-{{ post.id }}"
                         @click="htmx.find('#review-comment-{{ post.id }}').name = 'comment'"
-                        class="px-3 py-1.5 text-[0.8125rem] font-semibold rounded-full bg-red-500 hover:bg-red-600 text-white transition-colors">
-                    Reject
-                </button>
+                        class="px-3 py-1.5 text-[0.8125rem] font-semibold rounded-full bg-red-500 hover:bg-red-600 text-white transition-colors">Từ chối</button>
                 <button @click="showActions = false"
-                        class="px-3 py-1.5 text-[0.8125rem] font-medium rounded-full text-stone-500 hover:bg-stone-100 transition-colors ml-auto">
-                    Cancel
-                </button>
+                        class="px-3 py-1.5 text-[0.8125rem] font-medium rounded-full text-stone-500 hover:bg-stone-100 transition-colors ml-auto">Hủy</button>
             </div>
         </div>
     </div>

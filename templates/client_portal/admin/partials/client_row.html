@@ -1,3 +1,4 @@
+{% load i18n %}
 <div class="px-6 py-4 flex items-center gap-4" id="client-{{ client.membership.id }}"
      style="border-bottom: 1px solid var(--border);">
     <!-- Avatar -->
@@ -53,9 +54,7 @@
                     class="text-xs px-3 py-1.5 rounded-full font-medium cursor-pointer transition-colors"
                     style="color: #DC2626; background: transparent;"
                     onmouseenter="this.style.background='#FEF2F2'"
-                    onmouseleave="this.style.background='transparent'">
-                Remove
-            </button>
+                    onmouseleave="this.style.background='transparent'">Xóa</button>
         </form>
     </div>
 </div>

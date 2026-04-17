@@ -5,6 +5,7 @@ import uuid
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from .managers import MediaAssetManager
 
@@ -58,7 +59,7 @@ class MediaFolder(models.Model):
                 depth += 1
                 current = current.parent_folder
                 if depth >= 3:
-                    raise ValidationError("Folders cannot be nested more than 3 levels deep.")
+                    raise ValidationError(_("Folders cannot be nested more than 3 levels deep."))
 
     @property
     def depth(self):
@@ -124,12 +125,12 @@ class MediaAsset(models.Model):
     filename = models.CharField(max_length=255)
     media_type = models.CharField(max_length=20, choices=MediaType.choices)
     mime_type = models.CharField(max_length=100, blank=True, default="")
-    file_size = models.PositiveBigIntegerField(default=0, help_text="File size in bytes.")
+    file_size = models.PositiveBigIntegerField(default=0, help_text=_("File size in bytes."))
 
     # Image/video dimensions
     width = models.PositiveIntegerField(default=0)
     height = models.PositiveIntegerField(default=0)
-    duration = models.FloatField(default=0, help_text="Video duration in seconds.")
+    duration = models.FloatField(default=0, help_text=_("Video duration in seconds."))
 
     # Thumbnail for videos and large images
     thumbnail = models.ImageField(upload_to="media_library/thumbs/%Y/%m/", blank=True)
@@ -141,7 +142,7 @@ class MediaAsset(models.Model):
     is_starred = models.BooleanField(default=False)
 
     # Attribution for stock media
-    source = models.CharField(max_length=50, blank=True, default="", help_text="e.g., 'upload', 'unsplash', 'pexels'")
+    source = models.CharField(max_length=50, blank=True, default="", help_text=_("e.g., 'upload', 'unsplash', 'pexels'"))
     source_url = models.URLField(blank=True, default="")
     attribution = models.TextField(blank=True, default="")
 
@@ -154,7 +155,7 @@ class MediaAsset(models.Model):
     processed_variants = models.JSONField(
         default=dict,
         blank=True,
-        help_text="Dict of platform-specific processed versions: {'instagram': {'file': 'path', 'width': 1080}}",
+        help_text=_("Dict of platform-specific processed versions: {'instagram': {'file': 'path', 'width': 1080}}"),
     )
 
     # Version tracking
