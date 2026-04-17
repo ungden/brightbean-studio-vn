@@ -1,168 +1,194 @@
-# Deployment Notes - Railway
+# 🚀 BrightBean Studio Vietnamese - Deployment Complete
 
-## URLs
+## URLs chính
 
-- **GitHub Repo:** https://github.com/ungden/brightbean-studio-vn
-- **Railway Project:** https://railway.com/project/4bc22b1e-6a12-4f2f-8396-f3661c15effb
-- **App URL:** https://brightbean-app-production-5f36.up.railway.app
+| | |
+|---|---|
+| 🌐 **Live App** | https://brightbean-app-production-5f36.up.railway.app |
+| 💚 **Health** | https://brightbean-app-production-5f36.up.railway.app/health/ |
+| 🔐 **Admin** | https://brightbean-app-production-5f36.up.railway.app/admin/ |
+| 🔑 **Login** | https://brightbean-app-production-5f36.up.railway.app/accounts/login/ |
+| 📦 **GitHub** | https://github.com/ungden/brightbean-studio-vn |
+| 🚂 **Railway Dashboard** | https://railway.com/project/4bc22b1e-6a12-4f2f-8396-f3661c15effb |
 
-## Credentials
-
-### Superuser mặc định
+## Tài khoản Admin
 
 ```
 Email:    admin@brightbean.local
 Password: AdminPassword123!
 ```
 
-**⚠️ ĐỔI NGAY password này sau khi login lần đầu!**
+**⚠️ ĐỔI PASSWORD NGAY khi login lần đầu!** Vào `/admin/` → Users → admin@brightbean.local → Change password.
 
-Login tại: https://brightbean-app-production-5f36.up.railway.app/accounts/login/
+## ✅ Đã hoàn thành
 
-## Environment Variables đã set
+### Security hardening
+- Dockerfile: non-root user `appuser`, gunicorn 4 workers + access logging
+- Caddyfile: HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy, rate limiting 100/phút
+- docker-compose.prod.yml: health checks, resource limits, JSON logging với rotation
 
-- `DJANGO_SETTINGS_MODULE=config.settings.production`
-- `SECRET_KEY` (auto-generated, 86 chars)
-- `ENCRYPTION_KEY_SALT` (auto-generated, 43 chars)
-- `DEBUG=False`
-- `ALLOWED_HOSTS=.up.railway.app,.railway.app`
-- `DATABASE_URL` (từ Postgres service via reference)
-- `APP_URL=https://${{RAILWAY_PUBLIC_DOMAIN}}`
-- `STORAGE_BACKEND=local`
-- `EMAIL_BACKEND_TYPE=console`
-- `PORT=8000`
+### Performance
+- Fix N+1 queries trong composer views
+- Composite indexes trên Post model (workspace+created_at, workspace+scheduled_at)
 
-## Cần thêm env vars cho production thật
+### Vietnamese i18n
+- Django i18n đầy đủ (LocaleMiddleware, LANGUAGE_CODE=vi, LANGUAGES, LOCALE_PATHS)
+- 16 Python files wrap với gettext_lazy
+- 168 templates có {% load i18n %}
+- 94 templates dịch trực tiếp phổ biến UI (Đăng nhập, Mật khẩu, Lưu, ...)
+- locale/vi/LC_MESSAGES/django.po - 150+ translations
 
-### 1. Platform OAuth credentials (để connect social media)
+### Documentation
+- README.vi.md - tiếng Việt
+- CONTRIBUTING.vi.md - tiếng Việt
+- SECURITY.vi.md - tiếng Việt
 
-Set qua Railway dashboard hoặc CLI:
-```bash
-railway variables --set "PLATFORM_FACEBOOK_APP_ID=..." \
-  --set "PLATFORM_FACEBOOK_APP_SECRET=..." \
-  --set "PLATFORM_INSTAGRAM_APP_ID=..." \
-  # ... các platform khác
-```
+### CI/CD
+- pip-audit job: scan dependency vulnerabilities
+- bandit SAST job: scan code security
 
-### 2. Email (để gửi invitation, password reset)
+### Testing
+- Post state machine tests
+- Webhook security tests
+- Workspace isolation tests
+
+### Infrastructure
+- Railway project tạo với Postgres + app service
+- Env vars: SECRET_KEY, ENCRYPTION_KEY_SALT, DATABASE_URL, ...
+- 48+ database migrations applied
+- Superuser admin@brightbean.local tạo sẵn
+
+## Env vars hiện tại trên Railway
+
+| Key | Value |
+|-----|-------|
+| `DJANGO_SETTINGS_MODULE` | `config.settings.production` |
+| `SECRET_KEY` | (auto-generated, 86 chars) |
+| `ENCRYPTION_KEY_SALT` | (auto-generated, 43 chars) |
+| `DEBUG` | `False` |
+| `ALLOWED_HOSTS` | `.up.railway.app,.railway.app` |
+| `DATABASE_URL` | (reference từ Postgres service) |
+| `APP_URL` | `https://${{RAILWAY_PUBLIC_DOMAIN}}` |
+| `STORAGE_BACKEND` | `local` |
+| `EMAIL_BACKEND_TYPE` | `console` |
+| `PORT` | `8000` |
+
+## 🔧 TODO để làm production thật
+
+### 1. Đổi mật khẩu admin
+
+### 2. Setup Email SMTP (để gửi invitation, password reset)
 
 ```bash
 railway variables --set "EMAIL_BACKEND_TYPE=smtp" \
   --set "EMAIL_HOST=smtp.sendgrid.net" \
   --set "EMAIL_PORT=587" \
   --set "EMAIL_HOST_USER=apikey" \
-  --set "EMAIL_HOST_PASSWORD=SG..." \
+  --set "EMAIL_HOST_PASSWORD=SG.xxx" \
   --set "DEFAULT_FROM_EMAIL=noreply@yourdomain.com"
 ```
 
-### 3. Cloud storage (khuyến nghị cho production)
-
-Default là `STORAGE_BACKEND=local` → files lưu trong container (mất khi redeploy). Nên đổi sang S3/R2:
+### 3. Cloud Storage (file upload sẽ mất khi redeploy với local storage!)
 
 ```bash
 railway variables --set "STORAGE_BACKEND=s3" \
-  --set "S3_ACCESS_KEY=..." \
-  --set "S3_SECRET_KEY=..." \
-  --set "S3_BUCKET_NAME=..." \
-  --set "S3_ENDPOINT_URL=https://...r2.cloudflarestorage.com"
+  --set "S3_ACCESS_KEY=xxx" \
+  --set "S3_SECRET_KEY=xxx" \
+  --set "S3_BUCKET_NAME=brightbean-media" \
+  --set "S3_ENDPOINT_URL=https://xxx.r2.cloudflarestorage.com"
 ```
 
-### 4. Sentry (error tracking)
+Khuyến nghị Cloudflare R2 (rẻ + không egress fee).
+
+### 4. Connect Social Platform OAuth
+
+Đăng ký developer apps cho từng platform và set credentials:
 
 ```bash
-railway variables --set "SENTRY_DSN=https://...@sentry.io/..."
+# Facebook + Instagram
+railway variables --set "PLATFORM_FACEBOOK_APP_ID=xxx" \
+  --set "PLATFORM_FACEBOOK_APP_SECRET=xxx"
+
+# LinkedIn
+railway variables --set "PLATFORM_LINKEDIN_CLIENT_ID=xxx" \
+  --set "PLATFORM_LINKEDIN_CLIENT_SECRET=xxx"
+
+# Twitter/X, TikTok, YouTube, Pinterest, ...
+# Xem .env.example cho đầy đủ
 ```
 
-### 5. Google OAuth (SSO)
+### 5. Sentry error tracking
 
 ```bash
-railway variables --set "GOOGLE_AUTH_CLIENT_ID=..." \
-  --set "GOOGLE_AUTH_CLIENT_SECRET=..."
+railway variables --set "SENTRY_DSN=https://xxx@sentry.io/xxx"
 ```
 
-## Custom domain
+### 6. Custom domain
 
-### Thêm domain trong Railway:
-1. Vào dashboard → Service brightbean-app → Settings → Networking
-2. Add custom domain
-3. Cập nhật DNS (CNAME hoặc A record)
-
-### Update env var:
+1. Railway Dashboard → brightbean-app → Settings → Networking → Add domain
+2. Update DNS (CNAME)
+3. Update env:
 ```bash
 railway variables --set "ALLOWED_HOSTS=yourdomain.com,.up.railway.app" \
   --set "APP_URL=https://yourdomain.com"
 ```
 
-## Các lệnh quản trị
+### 7. Cleanup duplicate Postgres services
 
-### Chạy migration sau khi có schema changes:
+Project có 3 Postgres duplicates do timeouts. Xóa qua dashboard, giữ **Postgres-ozjq**.
+
+### 8. Upgrade Railway plan
+
+- Free tier: $5 credit/tháng (dev/test OK)
+- Hobby: $5/tháng
+- **Pro: $20/tháng** (khuyến nghị cho production, có auto-backup)
+
+## Lệnh admin hay dùng
+
 ```bash
+# Xem logs real-time
+railway logs
+
+# SSH vào container
+railway ssh --service brightbean-app "bash"
+
+# Run migration sau schema changes
 railway ssh --service brightbean-app "python manage.py migrate --noinput"
-```
 
-### Compile translations sau khi update .po:
-```bash
+# Compile thêm translations
 railway ssh --service brightbean-app "python manage.py compilemessages"
-```
 
-### Django shell:
-```bash
+# Django shell
 railway ssh --service brightbean-app "python manage.py shell"
+
+# Redeploy (từ GitHub)
+git push myrepo main
+
+# Redeploy (từ local, không commit)
+railway up --detach
+
+# Backup DB
+railway ssh --service Postgres-ozjq "pg_dump -U postgres railway" > backup_$(date +%Y%m%d).sql
 ```
 
-### Xem logs:
-```bash
-railway logs                    # runtime logs
-railway logs --build            # build logs
-```
+## Security checklist production
 
-### Redeploy:
-```bash
-git push myrepo main            # triggers deploy via GitHub
-# hoặc
-railway up --detach             # deploy từ local
-```
-
-## Cleanup
-
-Project hiện có 3 Postgres services thừa (Postgres, Postgres-touC, Postgres-9v3g) do timeout lúc setup. Xóa qua dashboard:
-
-https://railway.com/project/4bc22b1e-6a12-4f2f-8396-f3661c15effb
-
-Giữ lại: **Postgres-ozjq** (service app đang dùng)
-
-## Backup database
-
-```bash
-# Export
-railway ssh --service Postgres-ozjq "pg_dump -U postgres railway" > backup.sql
-
-# Hoặc dùng Railway dashboard → Postgres → Data → Export
-```
-
-## Monitoring
-
-- Railway Metrics: Dashboard → brightbean-app → Metrics
-- Health check: https://brightbean-app-production-5f36.up.railway.app/health/
-- Admin panel: https://brightbean-app-production-5f36.up.railway.app/admin/
-
-## Chi phí Railway
-
-- **Free tier:** $5 credit/tháng (đủ cho dev/test)
-- **Hobby:** $5/tháng (basic usage)
-- **Pro:** $20/tháng (production, nhiều resource hơn)
-
-Kiểm tra usage: Dashboard → Usage tab
-
-## Nâng cấp production
-
-Khi sẵn sàng cho traffic thật:
-
-1. ✅ Upgrade lên Railway Pro
-2. ✅ Set custom domain + HTTPS
-3. ✅ Config email SMTP (SendGrid/Mailgun/SES)
-4. ✅ Config S3/R2 storage
-5. ✅ Setup Sentry
-6. ✅ Connect social platform OAuth apps
-7. ✅ Enable 2FA cho admin accounts
-8. ✅ Backup database định kỳ (Railway Pro có auto-backup)
+- [x] `DEBUG=False`
+- [x] `SECRET_KEY` random 86 chars
+- [x] `ENCRYPTION_KEY_SALT` set unique
+- [x] HTTPS (Railway auto)
+- [x] `SESSION_COOKIE_SECURE=True` (auto từ production.py)
+- [x] `CSRF_COOKIE_SECURE=True` (auto từ production.py)
+- [x] HSTS + security headers (từ Django production settings)
+- [x] Rate limiting trên login (AuthRateLimitMiddleware)
+- [x] CSRF protection
+- [x] CSP headers
+- [x] Non-root user trong Docker
+- [x] Webhook signature verification
+- [ ] Đổi password admin default ← **LÀM NGAY**
+- [ ] Enable 2FA cho admin account
+- [ ] Setup email SMTP
+- [ ] Cloud storage (S3/R2)
+- [ ] Sentry
+- [ ] Custom domain
+- [ ] Database backup tự động
