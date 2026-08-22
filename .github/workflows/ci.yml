@@ -181,7 +181,7 @@ jobs:
       - name: Run pip-audit
         # Scans requirements.txt against the PyPI advisory database.
         # Drop --strict (default) to make this advisory-only if noisy.
-        run: pip-audit -r requirements.txt --disable-pip
+        run: pip-audit -r requirements.txt
 
   security-sast:
     name: Security SAST (bandit)
