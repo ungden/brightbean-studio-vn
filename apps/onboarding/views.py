@@ -19,8 +19,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
-from django.views.decorators.http import require_GET, require_POST
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.http import require_GET, require_POST
 
 from apps.credentials.models import PlatformCredential
 from apps.members.decorators import require_permission

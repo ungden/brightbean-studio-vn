@@ -14,9 +14,9 @@ from django.core import signing
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.http import require_GET, require_POST
 from django_ratelimit.decorators import ratelimit
-from django.utils.translation import gettext_lazy as _
 
 from apps.common.validators import is_safe_url as _is_safe_url
 from apps.credentials.models import PlatformCredential

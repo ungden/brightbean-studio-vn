@@ -25,9 +25,7 @@ class PlatformPostStateTransitionTests(TestCase):
             tos_accepted_at=timezone.now(),
         )
         self.org = Organization.objects.create(name="Test Org")
-        self.workspace = Workspace.objects.create(
-            organization=self.org, name="Test Workspace"
-        )
+        self.workspace = Workspace.objects.create(organization=self.org, name="Test Workspace")
         OrgMembership.objects.create(
             user=self.user,
             organization=self.org,
@@ -95,12 +93,8 @@ class WorkspaceIsolationTests(TestCase):
         self.org = Organization.objects.create(name="Test Org")
 
         # Create two workspaces
-        self.workspace_a = Workspace.objects.create(
-            organization=self.org, name="Workspace A"
-        )
-        self.workspace_b = Workspace.objects.create(
-            organization=self.org, name="Workspace B"
-        )
+        self.workspace_a = Workspace.objects.create(organization=self.org, name="Workspace A")
+        self.workspace_b = Workspace.objects.create(organization=self.org, name="Workspace B")
 
         # User is member of workspace A only
         OrgMembership.objects.create(
@@ -115,12 +109,8 @@ class WorkspaceIsolationTests(TestCase):
         )
 
         # Create posts in each workspace
-        Post.objects.create(
-            workspace=self.workspace_a, author=self.user, caption="Post in A"
-        )
-        Post.objects.create(
-            workspace=self.workspace_b, author=self.user, caption="Post in B"
-        )
+        Post.objects.create(workspace=self.workspace_a, author=self.user, caption="Post in A")
+        Post.objects.create(workspace=self.workspace_b, author=self.user, caption="Post in B")
 
     def test_workspace_scoped_manager_filters_by_workspace(self):
         """WorkspaceScopedManager should return only posts for the given workspace."""

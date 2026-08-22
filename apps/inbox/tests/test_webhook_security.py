@@ -19,9 +19,7 @@ class FacebookWebhookTests(TestCase):
 
     def _sign_payload(self, payload: bytes, secret: str) -> str:
         """Generate HMAC-SHA256 signature like Facebook does."""
-        return "sha256=" + hmac.new(
-            secret.encode("utf-8"), payload, hashlib.sha256
-        ).hexdigest()
+        return "sha256=" + hmac.new(secret.encode("utf-8"), payload, hashlib.sha256).hexdigest()
 
     def test_webhook_rejects_missing_signature(self):
         """Webhook POST without X-Hub-Signature-256 header should be rejected."""

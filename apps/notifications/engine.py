@@ -23,6 +23,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils import timezone
 
+from apps.common.validators import is_safe_url
+
 from .models import (
     Channel,
     DeliveryStatus,
@@ -280,6 +282,9 @@ def _dispatch_webhook(delivery: NotificationDelivery) -> None:
     if not webhook_url:
         logger.info("No webhook_url in notification data, skipping webhook delivery")
         return
+    if not is_safe_url(webhook_url):
+        logger.warning("Blocked notification webhook with an unsafe URL")
+        return
 
     webhook_secret = getattr(settings, "WEBHOOK_SECRET", settings.SECRET_KEY)
     signature = hmac.new(
@@ -299,7 +304,8 @@ def _dispatch_webhook(delivery: NotificationDelivery) -> None:
         method="POST",
     )
 
-    with urllib.request.urlopen(req, timeout=10) as resp:
+    # The URL was validated for an HTTP(S) scheme and a public address above.
+    with urllib.request.urlopen(req, timeout=10) as resp:  # nosec B310
         if resp.status >= 400:
             raise RuntimeError(f"Webhook returned HTTP {resp.status}")
 

@@ -168,12 +168,14 @@ Dự án hỗ trợ i18n đầy đủ với tiếng Việt là mặc định.
 ```python
 from django.utils.translation import gettext_lazy as _
 
+
 class MyModel(models.Model):
     name = models.CharField(
         max_length=100,
         verbose_name=_("Name"),
         help_text=_("Enter the name"),
     )
+
 
 # Trong views
 messages.success(request, _("Saved successfully."))

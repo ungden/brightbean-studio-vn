@@ -4,11 +4,11 @@ import contextlib
 import json
 import re
 import uuid
-import xml.etree.ElementTree as ET
 from datetime import UTC, datetime
 
 import httpx
 from dateutil import parser as date_parser
+from defusedxml import ElementTree
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
@@ -250,7 +250,10 @@ def compose(request, workspace_id, post_id=None):
         else:
             selected_account_ids = list(post.platform_posts.values_list("social_account_id", flat=True))
         media_attachments = post.media_attachments.select_related("media_asset").all()
-        platform_extras = {str(pp.social_account_id): (pp.platform_extra or {}) for pp in post.platform_posts.select_related("social_account").all()}
+        platform_extras = {
+            str(pp.social_account_id): (pp.platform_extra or {})
+            for pp in post.platform_posts.select_related("social_account").all()
+        }
     else:
         post = None
         # Pre-fill scheduled date/time from query params (e.g. when coming from calendar "+" CTA)
@@ -1459,7 +1462,11 @@ def _parse_media_asset_ids(raw_ids):
 
 def _build_idea_media_payload(idea):
     """Build ordered media payload and attachment list for Kanban rendering."""
-    attachments = [att for att in idea.media_attachments.select_related("media_asset").all() if att.media_asset_id and att.media_asset]
+    attachments = [
+        att
+        for att in idea.media_attachments.select_related("media_asset").all()
+        if att.media_asset_id and att.media_asset
+    ]
     media_payload = []
     for att in attachments:
         asset = att.media_asset
@@ -2687,8 +2694,8 @@ def _parse_published_at(raw_value):
 def _parse_feed_document(xml_content):
     """Parse RSS/Atom document into metadata and raw entries."""
     try:
-        root = ET.fromstring(xml_content)
-    except ET.ParseError:
+        root = ElementTree.fromstring(xml_content)
+    except ElementTree.ParseError:
         return None
 
     root_name = _xml_local_name(root.tag)

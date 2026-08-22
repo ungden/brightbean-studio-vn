@@ -55,7 +55,7 @@ class AuthRateLimitMiddleware:
     def __call__(self, request):
         if request.method == "POST" and any(request.path.startswith(p) for p in AUTH_RATE_LIMITED_PATHS):
             ip = self._get_client_ip(request)
-            cache_key = f"auth_ratelimit:{hashlib.md5(ip.encode()).hexdigest()}"
+            cache_key = f"auth_ratelimit:{hashlib.sha256(ip.encode()).hexdigest()}"
 
             attempts = cache.get(cache_key, 0)
             if attempts >= AUTH_RATE_LIMIT:

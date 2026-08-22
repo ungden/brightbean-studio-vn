@@ -13,6 +13,8 @@ def is_safe_url(url: str) -> bool:
     """
     try:
         parsed = urlparse(url)
+        if parsed.scheme not in {"http", "https"}:
+            return False
         hostname = parsed.hostname
         if not hostname:
             return False

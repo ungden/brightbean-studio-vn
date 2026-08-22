@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.http import Http404
 from django.shortcuts import redirect, render
-from django.views.decorators.http import require_http_methods, require_POST
 from django.utils.translation import gettext_lazy as _
+from django.views.decorators.http import require_http_methods, require_POST
 
 from apps.members.decorators import require_org_role
 from apps.members.models import OrgMembership, WorkspaceMembership

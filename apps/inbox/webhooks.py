@@ -4,8 +4,8 @@ import hashlib
 import hmac
 import json
 import logging
-import xml.etree.ElementTree as ET
 
+from defusedxml import ElementTree
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
@@ -258,8 +258,8 @@ def youtube_webhook(request):
 def _process_youtube_notification(body: bytes):
     """Parse Atom XML notification from YouTube and upsert messages."""
     try:
-        root = ET.fromstring(body)
-    except ET.ParseError:
+        root = ElementTree.fromstring(body)
+    except ElementTree.ParseError:
         logger.warning("Invalid XML in YouTube webhook payload.")
         return
 

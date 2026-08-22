@@ -142,7 +142,9 @@ class MediaAsset(models.Model):
     is_starred = models.BooleanField(default=False)
 
     # Attribution for stock media
-    source = models.CharField(max_length=50, blank=True, default="", help_text=_("e.g., 'upload', 'unsplash', 'pexels'"))
+    source = models.CharField(
+        max_length=50, blank=True, default="", help_text=_("e.g., 'upload', 'unsplash', 'pexels'")
+    )
     source_url = models.URLField(blank=True, default="")
     attribution = models.TextField(blank=True, default="")
 
